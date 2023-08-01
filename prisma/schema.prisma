@@ -1,0 +1,1375 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Ban {
+  id        Int        @id @default(autoincrement())
+  bantype   BanBantype @default(user)
+  value     String     @db.VarChar(100)
+  reason    String     @db.MediumText
+  expire    Int        @default(0)
+  addedBy   String     @map("added_by") @db.VarChar(50)
+  addedDate Int        @map("added_date")
+
+  @@index([expire], map: "expire")
+  @@index([value], map: "value")
+  @@map("ban")
+}
+
+model BotPet {
+  id          Int     @id @default(autoincrement())
+  userId      Int     @map("user_id")
+  roomId      Int     @default(0) @map("room_id")
+  name        String  @default("Unnamed") @db.VarChar(32)
+  race        String  @default("000") @db.VarChar(3)
+  color       String  @default("FFFFFF") @db.VarChar(6)
+  type        Int
+  experience  Int
+  energy      Int
+  nutrition   Int     @default(100)
+  respect     Int     @default(0)
+  createstamp Int     @default(0)
+  x           Int     @default(0)
+  y           Int     @default(0)
+  z           Float   @default(0)
+  haveSaddle  Int     @default(0) @map("have_saddle")
+  hairdye     Int     @default(1)
+  pethair     Int     @default(0)
+  anyoneRide  Boolean @default(true) @map("anyone_ride")
+
+  @@index([roomId], map: "room_id")
+  @@index([userId], map: "user_id")
+  @@map("bot_pet")
+}
+
+model BotUser {
+  id          Int     @id @default(autoincrement())
+  userId      Int     @default(0) @map("user_id")
+  name        String  @default("") @db.VarChar(50)
+  motto       String  @default("") @db.VarChar(50)
+  gender      String  @default("") @db.VarChar(1)
+  look        String  @default("") @db.VarChar(500)
+  roomId      Int     @default(0) @map("room_id")
+  walkEnabled Boolean @default(false) @map("walk_enabled")
+  x           Int     @default(0)
+  y           Int     @default(0)
+  z           Int     @default(0)
+  rotation    Int     @default(0)
+  chatEnabled Boolean @default(false) @map("chat_enabled")
+  chatText    String  @map("chat_text") @db.MediumText
+  chatSeconds Int     @default(7) @map("chat_seconds")
+  isDancing   Boolean @default(false) @map("is_dancing")
+  isMixchat   Boolean @default(true) @map("is_mixchat")
+  status      Int     @default(0)
+  enable      Int     @default(0)
+  handitem    Int     @default(0)
+
+  @@index([userId], map: "ownerId")
+  @@index([roomId], map: "room_id")
+  @@map("bot_user")
+}
+
+model CatalogBotPreset {
+  id     Int                    @id @default(autoincrement())
+  name   String                 @db.VarChar(255)
+  figure String                 @db.VarChar(255)
+  gender String                 @db.VarChar(255)
+  motto  String                 @db.VarChar(255)
+  aiType CatalogBotPresetAiType @default(generic) @map("ai_type")
+
+  @@map("catalog_bot_preset")
+}
+
+model CatalogItem {
+  id                 Int                 @id @default(autoincrement())
+  pageId             Int                 @map("page_id")
+  itemId             Int                 @map("item_id")
+  catalogName        String              @map("catalog_name") @db.VarChar(100)
+  costCredits        Int                 @default(1) @map("cost_credits")
+  costPixels         Int                 @default(0) @map("cost_pixels")
+  costDiamonds       Int                 @default(0) @map("cost_diamonds")
+  costLimitcoins     Int                 @default(0) @map("cost_limitcoins")
+  amount             Int                 @default(1)
+  offerActive        Boolean             @default(true) @map("offer_active")
+  badge              String              @default("") @db.VarChar(255)
+  catalogItemLimited CatalogItemLimited?
+
+  @@index([itemId], map: "item_ids")
+  @@index([pageId], map: "page_id")
+  @@map("catalog_item")
+}
+
+model CatalogItemLimited {
+  catalogItemId Int         @id @map("catalog_item_id")
+  limitedSells  Int         @default(0) @map("limited_sells")
+  limitedStack  Int         @default(0) @map("limited_stack")
+  catalogItem   CatalogItem @relation(fields: [catalogItemId], references: [id], onDelete: Cascade)
+
+  @@map("catalog_item_limited")
+}
+
+model CatalogMarketplaceData {
+  id       Int @id @default(autoincrement())
+  sprite   Int
+  sold     Int @default(0)
+  avgprice Int @default(0)
+
+  @@map("catalog_marketplace_data")
+}
+
+model CatalogMarketplaceOffer {
+  offerId       Int    @id @default(autoincrement()) @map("offer_id")
+  userId        Int    @map("user_id")
+  itemId        Int    @map("item_id")
+  askingPrice   Int    @map("asking_price")
+  totalPrice    Int    @default(0) @map("total_price")
+  publicName    String @map("public_name") @db.MediumText
+  spriteId      Int    @map("sprite_id")
+  itemType      Int    @default(1) @map("item_type")
+  timestamp     Int    @default(0)
+  state         Int    @default(1)
+  extraData     String @map("extra_data") @db.MediumText
+  furniId       Int    @map("furni_id")
+  limitedNumber Int    @default(0) @map("limited_number")
+  limitedStack  Int    @default(0) @map("limited_stack")
+
+  @@map("catalog_marketplace_offer")
+}
+
+model CatalogPage {
+  id            Int     @id @default(autoincrement())
+  parentId      Int     @default(-1) @map("parent_id")
+  caption       String  @db.VarChar(100)
+  iconImage     Int     @default(1) @map("icon_image")
+  enabled       Boolean @default(true)
+  requiredRight String  @default("") @map("required_right") @db.VarChar(50)
+  orderNum      Int     @default(0) @map("order_num")
+  pageLayout    String  @default("default_3x3") @map("page_layout") @db.VarChar(50)
+  pageLink      String  @default("") @map("page_link") @db.VarChar(255)
+  pageStrings1  String  @default("wibbo|catalog_base") @map("page_strings_1") @db.VarChar(255)
+  pageStrings2  String  @map("page_strings_2") @db.Text
+  isPremium     Boolean @default(false) @map("is_premium")
+
+  @@index([orderNum], map: "order_num")
+  @@map("catalog_page")
+}
+
+model CatalogPageLangue {
+  pageId         Int     @id @map("page_id")
+  captionFr      String? @map("caption_fr") @db.VarChar(100)
+  captionEn      String? @map("caption_en") @db.VarChar(100)
+  captionBr      String? @map("caption_br") @db.VarChar(100)
+  pageStrings2Fr String? @map("page_strings_2_fr") @db.MediumText
+  pageStrings2En String? @map("page_strings_2_en") @db.MediumText
+  pageStrings2Br String? @map("page_strings_2_br") @db.MediumText
+
+  @@map("catalog_page_langue")
+}
+
+model CatalogPetRace {
+  id        Int     @id @default(autoincrement())
+  raceid    Int
+  color1    Int?
+  color2    Int?
+  has1color Boolean @default(false)
+  has2color Boolean @default(false)
+
+  @@map("catalog_pet_race")
+}
+
+model CatalogPromotion {
+  id       Int     @id @default(autoincrement())
+  title    String? @default("") @db.VarChar(35)
+  titleEn  String? @map("title_en") @db.VarChar(35)
+  titleBr  String? @map("title_br") @db.VarChar(35)
+  image    String? @default("") @db.VarChar(75)
+  unknown  Int?    @default(0)
+  pageLink String? @default("") @map("page_link") @db.VarChar(35)
+  parentId Int?    @default(0) @map("parent_id")
+
+  @@map("catalog_promotion")
+}
+
+model CatalogVoucher {
+  voucher     String             @id @db.VarChar(45)
+  type        CatalogVoucherType @default(credits)
+  value       Int                @default(100)
+  currentUses Int                @default(0) @map("current_uses")
+  maxUses     Int                @default(1) @map("max_uses")
+  enabled     Boolean            @default(true)
+
+  @@map("catalog_voucher")
+}
+
+model CmsForumPost {
+  id       Int     @id @unique(map: "id") @default(autoincrement())
+  threadid Int     @default(0)
+  message  String  @db.MediumText
+  author   String  @db.VarChar(25)
+  date     String  @db.VarChar(30)
+  motto    String  @db.VarChar(100)
+  look     String  @db.VarChar(200)
+  idAuteur Int     @map("id_auteur")
+  rank     Boolean
+
+  @@index([threadid], map: "threadid")
+  @@map("cms_forum_post")
+}
+
+model CmsForumThread {
+  id             Int     @id @unique(map: "id") @default(autoincrement())
+  type           Int     @db.TinyInt
+  title          String  @db.VarChar(50)
+  author         String  @db.VarChar(25)
+  date           String  @db.VarChar(35)
+  lastpostAuthor String  @map("lastpost_author") @db.VarChar(25)
+  lastpostDate   String  @map("lastpost_date") @db.VarChar(35)
+  posts          Int
+  mainPost       Int     @map("main_post")
+  statut         Int     @db.TinyInt
+  categorie      Boolean
+  views          Int     @default(0)
+
+  @@index([author], map: "author")
+  @@index([categorie], map: "categorie")
+  @@index([date], map: "date")
+  @@index([lastpostDate], map: "lastpost_date")
+  @@index([mainPost], map: "main_post")
+  @@map("cms_forum_thread")
+}
+
+model CmsFourmCategory {
+  id    Int     @id @default(autoincrement())
+  name  String? @db.VarChar(200)
+  order Int     @default(0)
+
+  @@map("cms_fourm_category")
+}
+
+model CmsMailConfirm {
+  userId           Int    @id @unique(map: "user_id") @map("user_id")
+  codedevalidation String @db.VarChar(100)
+  email            String @db.VarChar(100)
+  temps            Int
+  type             Int    @default(0)
+
+  @@index([email], map: "email")
+  @@map("cms_mail_confirm")
+}
+
+model CmsMailForgot {
+  id     Int    @id @default(autoincrement())
+  pass   String @db.VarChar(200)
+  email  String @db.VarChar(100)
+  expire Int
+  users  String @db.VarChar(200)
+
+  @@index([pass], map: "pass")
+  @@map("cms_mail_forgot")
+}
+
+model CmsNews {
+  id            Int    @id @default(autoincrement())
+  title         String @db.VarChar(200)
+  categoryId    Int    @default(1) @map("category_id")
+  topstoryImage String @map("topstory_image") @db.MediumText
+  body          String @db.MediumText
+  snippet       String @db.MediumText
+  timestamp     Int    @unique(map: "timestam")
+  author        String @db.VarChar(100)
+  authorId      Int    @map("author_id")
+  link_keyword  String @map("link_keyword") @db.VarChar(100)
+
+  @@map("cms_news")
+}
+
+model CmsStaff {
+  id            Int     @id @default(autoincrement())
+  userid        Int
+  rank          Int
+  function      String? @db.VarChar(100)
+  socialInsta   String? @map("social_insta") @db.VarChar(100)
+  socialDiscord String? @map("social_discord") @db.VarChar(100)
+
+  @@map("cms_staff")
+}
+
+model CmsStaffProtect {
+  id       Int     @id @default(autoincrement())
+  ip       String? @default("") @db.VarChar(120)
+  username String  @db.VarChar(50)
+  hide     Boolean @default(false)
+
+  @@index([id], map: "id")
+  @@map("cms_staff_protect")
+}
+
+model EmulatorAchievement {
+  id             Int    @id @default(autoincrement())
+  groupName      String @default("ACH_") @map("group_name") @db.VarChar(64)
+  category       String @default("identity") @db.VarChar(255)
+  level          Int    @default(1)
+  rewardPixels   Int    @default(100) @map("reward_pixels")
+  rewardPoints   Int    @default(10) @map("reward_points")
+  progressNeeded Int    @default(1) @map("progress_needed")
+
+  @@map("emulator_achievement")
+}
+
+model EmulatorBanner {
+  id        Int     @id @default(autoincrement())
+  haveLayer Boolean @default(false) @map("have_layer")
+
+  @@map("emulator_banner")
+}
+
+model EmulatorChatStyle {
+  id            Int    @id
+  name          String @default("") @db.VarChar(25)
+  requiredRight String @default("") @map("required_right") @db.VarChar(25)
+
+  @@map("emulator_chat_style")
+}
+
+model EmulatorCommand {
+  id            Int     @id @default(autoincrement())
+  input         String  @db.VarChar(100)
+  minrank       Int
+  descriptionFr String? @map("description_fr") @db.MediumText
+  descriptionEn String? @map("description_en") @db.MediumText
+  descriptionBr String? @map("description_br") @db.MediumText
+
+  @@map("emulator_command")
+}
+
+model EmulatorCommandPet {
+  id      Int    @id
+  command String @db.VarChar(200)
+
+  @@map("emulator_command_pet")
+}
+
+model EmulatorEffect {
+  id        Int     @id
+  onlyStaff Boolean @default(false) @map("only_staff")
+
+  @@map("emulator_effect")
+}
+
+model EmulatorLandingview {
+  index         Int     @id @default(autoincrement())
+  header        String  @default("[Header Name]") @db.VarChar(255)
+  body          String  @default("[BODY]") @db.VarChar(255)
+  button        String  @default("[BUTTON]") @db.VarChar(255)
+  inGamePromo   Boolean @default(true) @map("in_game_promo")
+  specialAction String  @default("[LINK HERE]") @map("special_action") @db.VarChar(255)
+  image         String  @default("") @db.VarChar(255)
+  enabled       Boolean @default(true)
+
+  @@map("emulator_landingview")
+}
+
+model EmulatorLootbox {
+  id              Int                     @id @default(autoincrement())
+  interactionType String                  @map("interaction_type") @db.VarChar(255)
+  probability     Int                     @default(1)
+  pageId          Int                     @map("page_id")
+  itemId          Int                     @default(0) @map("item_id")
+  category        EmulatorLootboxCategory @default(furni)
+  amount          Int                     @default(0)
+
+  @@map("emulator_lootbox")
+}
+
+model EmulatorPermission {
+  id         Int    @id @default(autoincrement())
+  rank       Int
+  permission String @db.VarChar(50)
+
+  @@index([rank], map: "rank")
+  @@map("emulator_permission")
+}
+
+model EmulatorQuest {
+  id           Int    @id @default(autoincrement())
+  category     String @default("") @db.VarChar(32)
+  seriesNumber Int    @default(0) @map("series_number")
+  goalType     Int    @default(0) @map("goal_type")
+  goalData     Int    @default(0) @map("goal_data")
+  name         String @default("") @db.VarChar(32)
+  reward       Int    @default(10)
+  dataBit      String @default("") @map("data_bit") @db.VarChar(2)
+
+  @@map("emulator_quest")
+}
+
+model EmulatorSetting {
+  id    Int    @id @default(autoincrement())
+  key   String @db.VarChar(255)
+  value String @db.Text
+
+  @@map("emulator_setting")
+}
+
+model EmulatorStats {
+  id     Int @id @default(autoincrement())
+  online Int
+  time   Int @unique(map: "date")
+  room   Int
+
+  @@map("emulator_stats")
+}
+
+model EmulatorStatus {
+  id          Int @id @default(autoincrement())
+  status      Int @default(0)
+  usersOnline Int @default(0) @map("users_online")
+  roomsLoaded Int @default(0) @map("rooms_loaded")
+  stamp       Int
+  userpeak    Int
+
+  @@map("emulator_status")
+}
+
+model EmulatorText {
+  id          Int     @id @default(autoincrement())
+  identifiant String  @unique @db.VarChar(200)
+  valueFr     String? @map("value_fr") @db.Text
+  valueEn     String? @map("value_en") @db.Text
+  valueBr     String? @map("value_br") @db.Text
+
+  @@map("emulator_text")
+}
+
+model Guild {
+  id        Int     @id @default(autoincrement())
+  name      String  @db.VarChar(50)
+  desc      String  @db.VarChar(255)
+  badge     String  @db.VarChar(50)
+  ownerId   Int     @map("owner_id")
+  created   Int
+  roomId    Int     @map("room_id")
+  state     Int     @default(0)
+  colour1   Int
+  colour2   Int
+  admindeco Boolean @default(false)
+  hasForum  Boolean @default(false) @map("has_forum")
+
+  @@index([ownerId], map: "ownerid")
+  @@map("guild")
+}
+
+model GuildItem {
+  id          Int
+  type        GuildItemType
+  firstvalue  String        @db.VarChar(255)
+  secondvalue String        @db.VarChar(255)
+  enabled     Boolean       @default(true)
+
+  @@id([id, type])
+  @@map("guild_item")
+}
+
+model GuildMembership {
+  groupId Int @map("group_id")
+  userId  Int @map("user_id")
+  rank    Int @default(0)
+
+  @@id([groupId, userId])
+  @@index([groupId], map: "groupid")
+  @@index([userId], map: "userid")
+  @@map("guild_membership")
+}
+
+model GuildRequest {
+  groupId Int @map("group_id")
+  userId  Int @map("user_id")
+
+  @@id([groupId, userId])
+  @@index([groupId], map: "group_id")
+  @@index([userId], map: "user_id")
+  @@map("guild_request")
+}
+
+model Item {
+  id        Int     @id @default(autoincrement())
+  userId    Int     @map("user_id")
+  roomId    Int     @default(0) @map("room_id")
+  baseItem  Int     @map("base_item")
+  extraData String? @default("") @map("extra_data") @db.VarChar(500)
+  x         Int     @default(0)
+  y         Int     @default(0)
+  z         Float   @default(0)
+  rot       Int     @default(0)
+  wallPos   String? @default("") @map("wall_pos") @db.VarChar(100)
+
+  @@index([roomId], map: "room_id")
+  @@index([userId], map: "user_id")
+  @@map("item")
+}
+
+model ItemBase {
+  id                    Int          @id @default(autoincrement())
+  itemName              String       @map("item_name") @db.VarChar(100)
+  type                  ItemBaseType @default(s)
+  width                 Int          @default(1)
+  length                Int          @default(1)
+  stackHeight           Float        @default(1) @map("stack_height")
+  canStack              Boolean      @default(true) @map("can_stack")
+  canSit                Boolean      @default(false) @map("can_sit")
+  isWalkable            Boolean      @default(false) @map("is_walkable")
+  spriteId              Int          @map("sprite_id")
+  allowRecycle          Boolean      @default(false) @map("allow_recycle")
+  allowTrade            Boolean      @default(true) @map("allow_trade")
+  allowMarketplaceSell  Boolean      @default(false) @map("allow_marketplace_sell")
+  allowGift             Boolean      @default(true) @map("allow_gift")
+  allowInventoryStack   Boolean      @default(true) @map("allow_inventory_stack")
+  interactionType       String       @default("default") @map("interaction_type") @db.VarChar(255)
+  interactionModesCount Int          @default(1) @map("interaction_modes_count")
+  vendingIds            String       @default("0") @map("vending_ids") @db.VarChar(100)
+  heightAdjustable      String       @default("0") @map("height_adjustable") @db.VarChar(100)
+  effectId              Int          @default(0) @map("effect_id")
+  isRare                Boolean      @default(false) @map("is_rare")
+  rarityLevel           Int          @default(0) @map("rarity_level")
+  itemStat              ItemStat?
+  logLootbox            LogLootbox[]
+
+  @@index([spriteId], map: "sprite_id")
+  @@map("item_base")
+}
+
+model ItemLimited {
+  itemId        Int @id @unique(map: "item_id") @map("item_id")
+  limitedNumber Int @map("limited_number")
+  limitedStack  Int @default(0) @map("limited_stack")
+
+  @@map("item_limited")
+}
+
+model ItemMoodlight {
+  itemId        Int     @id @unique(map: "item_id") @map("item_id")
+  enabled       Boolean @default(false)
+  currentPreset Int     @map("current_preset")
+  presetOne     String  @map("preset_one") @db.VarChar(200)
+  presetTwo     String  @map("preset_two") @db.VarChar(200)
+  presetThree   String  @map("preset_three") @db.VarChar(200)
+
+  @@map("item_moodlight")
+}
+
+model ItemPresent {
+  itemId    Int     @id @unique(map: "item_id") @map("item_id")
+  baseId    Int     @map("base_id")
+  extraData String? @default("") @map("extra_data") @db.VarChar(500)
+
+  @@map("item_present")
+}
+
+model ItemStat {
+  baseId   Int      @id @unique(map: "base_id") @map("base_id")
+  amount   Int      @default(0)
+  itemBase ItemBase @relation(fields: [baseId], references: [id], onDelete: Cascade)
+
+  @@map("item_stat")
+}
+
+model ItemTeleport {
+  teleOneId Int @map("tele_one_id")
+  teleTwoId Int @map("tele_two_id")
+
+  @@id([teleOneId, teleTwoId])
+  @@index([teleOneId], map: "tele_one_id")
+  @@map("item_teleport")
+}
+
+model ItemWired {
+  triggerId          Int     @id @map("trigger_id")
+  triggerData2       String? @default("") @map("trigger_data_2") @db.VarChar(255)
+  triggerData        String? @map("trigger_data") @db.MediumText
+  allUserTriggerable Boolean @default(true) @map("all_user_triggerable")
+  triggersItem       String? @map("triggers_item") @db.MediumText
+  delay              Int     @default(0)
+
+  @@map("item_wired")
+}
+
+model LogChat {
+  id        Int    @id @default(autoincrement())
+  userId    Int    @map("user_id")
+  roomId    Int?   @map("room_id")
+  userName  String @map("user_name") @db.VarChar(200)
+  timestamp Int    @default(0)
+  message   String @db.Text
+  type      String @db.VarChar(10)
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  room      Room?  @relation(fields: [roomId], references: [id])
+
+  @@index([message(length: 100)], map: "message")
+  @@index([roomId], map: "room_id")
+  @@index([timestamp, userId], map: "searth")
+  @@index([userId], map: "user_id")
+  @@index([userName], map: "user_name")
+  @@map("log_chat")
+}
+
+model LogChatPub {
+  id        Int    @id @default(autoincrement())
+  userId    Int    @map("user_id")
+  userName  String @map("user_name") @db.VarChar(200)
+  timestamp Int    @default(0)
+  message   String @db.VarChar(150)
+
+  @@map("log_chat_pub")
+}
+
+model LogCommand {
+  id        Int    @id @default(autoincrement())
+  userId    Int    @map("user_id")
+  userName  String @map("user_name") @db.VarChar(100)
+  roomid    Int
+  command   String @db.VarChar(50)
+  extraData String @map("extra_data") @db.MediumText
+  timestamp Int
+
+  @@index([command], map: "commands")
+  @@index([timestamp], map: "timestamp")
+  @@index([userName], map: "user_name")
+  @@map("log_command")
+}
+
+model LogFlagme {
+  id          Int    @id @default(autoincrement())
+  userId      Int    @map("user_id")
+  oldusername String @db.VarChar(50)
+  newusername String @db.VarChar(50)
+  time        Int
+
+  @@map("log_flagme")
+}
+
+model LogLogin {
+  id        Int    @id @default(autoincrement())
+  userId    Int    @map("user_id")
+  date      Int    @default(0)
+  ip        String @db.VarChar(255)
+  userAgent String @map("user_agent") @db.VarChar(255)
+  user      User   @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "user_id")
+  @@map("log_login")
+}
+
+model LogLootbox {
+  id              Int      @id @default(autoincrement())
+  interactionType String   @map("interaction_type") @db.VarChar(255)
+  userId          Int      @map("user_id")
+  itemId          Int      @map("item_id")
+  baseId          Int      @map("base_id")
+  timestamp       Int
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  itemBase        ItemBase @relation(fields: [baseId], references: [id], onDelete: Cascade)
+
+  @@map("log_lootbox")
+}
+
+model LogPayment {
+  historyPaymentId  Int      @id @default(autoincrement()) @map("history_payment_id")
+  docId             Int      @map("doc_id")
+  userId            Int      @map("user_id")
+  awards            Int
+  externalReference String   @map("external_reference") @db.VarChar(50)
+  promoId           Int      @map("promo_id")
+  date              DateTime @db.DateTime(0)
+
+  @@index([externalReference], map: "external_reference")
+  @@index([userId], map: "user_id")
+  @@map("log_payment")
+}
+
+model LogShop {
+  id            Int    @id @default(autoincrement())
+  userId        Int    @map("user_id")
+  date          Int
+  price         Int
+  content       String @db.VarChar(50)
+  type          Int
+  catalogItemId Int    @default(0) @map("catalog_item_id")
+  user          User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([date], map: "date")
+  @@index([type], map: "type")
+  @@index([userId], map: "userid")
+  @@map("log_shop")
+}
+
+model LogSlotmachine {
+  id     Int     @id @default(autoincrement())
+  userId Int     @map("user_id")
+  amount Int
+  isWin  Boolean @map("is_win")
+  date   Int
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("log_slotmachine")
+}
+
+model LogStaff {
+  id     Int    @id @unique(map: "id") @default(autoincrement())
+  pseudo String @db.VarChar(50)
+  action String @db.VarChar(200)
+  date   Int
+
+  @@map("log_staff")
+}
+
+model LogTrade {
+  id           Int    @id @default(autoincrement())
+  userOneId    Int    @map("user_one_id")
+  userTwoId    Int    @map("user_two_id")
+  userOneItems String @map("user_one_items") @db.MediumText
+  userTwoItems String @map("user_two_items") @db.MediumText
+  roomId       Int    @map("room_id")
+  time         Int
+  userOneTrade User   @relation(fields: [userOneId], references: [id], name: "userOneTrade")
+  userTwoTrade User   @relation(fields: [userTwoId], references: [id], name: "userTwoTrade")
+
+  @@map("log_trade")
+}
+
+model LogVpn {
+  id               Int     @id @default(autoincrement())
+  ip               String  @db.VarChar(255)
+  ipCountry        String? @map("ip_country") @db.VarChar(4)
+  host             String? @db.VarChar(255)
+  timestampCreated Int     @map("timestamp_created")
+  isVpn            Boolean @default(true) @map("is_vpn")
+
+  @@index([ip, host], map: "ipandhost")
+  @@map("log_vpn")
+}
+
+model LogSandbox {
+  id Int @id @default(autoincrement())
+  userId Int @map("user_id")
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  method String @db.VarChar(10)
+  editName String @db.VarChar(20) @map("edit_name")
+  editKey String @db.VarChar(200) @map("edit_key")
+  timestampCreated Int @map("timestamp_created")
+
+  @@map("log_sandbox")
+}
+
+model MessengerFriendship {
+  userOneId Int @map("user_one_id")
+  userTwoId Int @map("user_two_id")
+  relation  Int @default(0)
+
+  @@id([userOneId, userTwoId])
+  @@index([userOneId], map: "user_one_id")
+  @@index([userTwoId], map: "user_two_id")
+  @@map("messenger_friendship")
+}
+
+model MessengerOfflineMessage {
+  id        Int    @id @default(autoincrement())
+  toId      Int    @default(0) @map("to_id")
+  fromId    Int    @default(0) @map("from_id")
+  message   String @db.VarChar(255)
+  timestamp Int    @default(0)
+
+  @@index([toId], map: "to_id")
+  @@map("messenger_offline_message")
+}
+
+model MessengerRequest {
+  fromId Int @map("from_id")
+  toId   Int @map("to_id")
+
+  @@id([fromId, toId])
+  @@index([fromId], map: "from_id")
+  @@index([toId], map: "to_id")
+  @@map("messenger_request")
+}
+
+model ModerationPreset {
+  id      Int                  @id @default(autoincrement())
+  enabled Boolean              @default(true)
+  type    ModerationPresetType @default(message)
+  message String               @db.MediumText
+
+  @@index([enabled], map: "enabled")
+  @@map("moderation_preset")
+}
+
+model ModerationResolution {
+  id         Int                      @id @default(autoincrement())
+  type       ModerationResolutionType @default(Sexual)
+  title      String                   @db.VarChar(100)
+  subtitle   String                   @db.VarChar(100)
+  banHours   Int                      @default(0) @map("ban_hours")
+  enableMute Int                      @default(0) @map("enable_mute")
+  muteHours  Int                      @default(0) @map("mute_hours")
+  reminder   Int                      @default(0)
+  message    String                   @db.VarChar(100)
+
+  @@map("moderation_resolution")
+}
+
+model ModerationTicket {
+  id          Int                    @id @unique(map: "id") @default(autoincrement())
+  score       Int
+  type        Int
+  status      ModerationTicketStatus @default(open)
+  senderId    Int                    @map("sender_id")
+  reportedId  Int                    @map("reported_id")
+  moderatorId Int                    @map("moderator_id")
+  message     String                 @db.VarChar(500)
+  roomId      Int                    @map("room_id")
+  roomName    String                 @map("room_name") @db.VarChar(100)
+  timestamp   Int
+
+  @@index([senderId], map: "sender_id")
+  @@index([status], map: "statue")
+  @@map("moderation_ticket")
+}
+
+model ModerationTopic {
+  id      Int    @id @default(autoincrement())
+  caption String @default("") @db.VarChar(225)
+
+  @@map("moderation_topic")
+}
+
+model ModerationTopicAction {
+  id              Int    @id @default(autoincrement())
+  parentId        Int    @map("parent_id")
+  type            String @db.VarChar(255)
+  caption         String @default("") @db.VarChar(225)
+  messageText     String @map("message_text") @db.VarChar(255)
+  defaultSanction String @map("default_sanction") @db.VarChar(255)
+  muteTime        Int    @default(0) @map("mute_time")
+  banTime         Int    @default(0) @map("ban_time")
+  ipTime          Int    @default(0) @map("ip_time")
+  tradeLockTime   Int    @default(0) @map("trade_lock_time")
+
+  @@map("moderation_topic_action")
+}
+
+model NavigatorCategory {
+  id                 Int                              @id
+  category           NavigatorCategoryCategory        @default(hotel_view)
+  categoryIdentifier String                           @default("") @map("category_identifier") @db.VarChar(35)
+  publicName         String                           @default("") @map("public_name") @db.VarChar(35)
+  viewMode           NavigatorCategoryViewMode        @default(REGULAR) @map("view_mode")
+  requiredRank       Int                              @default(1) @map("required_rank")
+  categoryType       String                           @default("category") @map("category_type") @db.VarChar(25)
+  searchAllowance    NavigatorCategorySearchAllowance @default(SHOW_MORE) @map("search_allowance")
+  minimized          Boolean                          @default(false)
+  enabled            Boolean                          @default(true)
+  orderId            Int                              @default(0) @map("order_id")
+
+  @@map("navigator_category")
+}
+
+model NavigatorPublic {
+  roomId       Int                   @id @map("room_id")
+  imageUrl     String?               @map("image_url") @db.MediumText
+  orderNum     Int                   @default(1) @map("order_num")
+  enabled      Boolean               @default(true)
+  langue       NavigatorPublicLangue @default(fr)
+  categoryType String                @default("featured") @map("category_type") @db.VarChar(25)
+
+  @@map("navigator_public")
+}
+
+model Roleplay {
+  id        Int @id @default(autoincrement())
+  ownerId   Int @map("owner_id")
+  hopitalId Int @default(0) @map("hopital_id")
+  prisonId  Int @map("prison_id")
+
+  @@map("roleplay")
+}
+
+model RoleplayEnemy {
+  id                Int               @default(autoincrement())
+  type              RoleplayEnemyType @default(bot)
+  health            Int               @default(100)
+  weaponFarId       Int               @default(4) @map("weapon_far_id")
+  weaponCacId       Int               @default(1) @map("weapon_cac_id")
+  deadTimer         Int               @default(30) @map("dead_timer")
+  lootItemId        Int               @default(0) @map("loot_item_id")
+  moneyDrop         Int               @default(10) @map("money_drop")
+  dropScriptId      Int               @default(5461) @map("drop_script_id")
+  teamId            Int               @default(0) @map("team_id")
+  aggroDistance     Int               @default(0) @map("aggro_distance")
+  zoneDistance      Int               @map("zone_distance")
+  resetPosition     Boolean           @default(true) @map("reset_position")
+  lostAggroDistance Int               @default(12) @map("lost_aggro_distance")
+  zombieMode        Boolean           @default(false) @map("zombie_mode")
+
+  @@id([id, type])
+  @@map("roleplay_enemy")
+}
+
+model RoleplayItem {
+  id         Int                  @id @default(autoincrement())
+  name       String               @db.VarChar(100)
+  desc       String?              @db.MediumText
+  price      Int                  @default(0)
+  type       RoleplayItemType
+  value      Int                  @default(0)
+  allowstack Boolean              @default(true)
+  category   RoleplayItemCategory
+
+  @@map("roleplay_item")
+}
+
+model RoleplayWeapon {
+  id          Int                       @id @default(autoincrement())
+  type        RoleplayWeaponType        @default(cac)
+  domageMin   Int                       @default(0) @map("domage_min")
+  domageMax   Int                       @default(0) @map("domage_max")
+  interaction RoleplayWeaponInteraction @default(none)
+  enable      Int                       @default(0)
+  freezeTime  Int                       @default(2) @map("freeze_time")
+  distance    Int                       @default(10)
+
+  @@map("roleplay_weapon")
+}
+
+model Room {
+  id                  Int       @id @default(autoincrement())
+  caption             String    @default("Room") @db.VarChar(100)
+  owner               String    @db.VarChar(75)
+  description         String?   @default("") @db.VarChar(255)
+  category            Int       @default(0)
+  state               RoomState @default(open)
+  usersMax            Int       @default(25) @map("users_max")
+  modelName           String    @map("model_name") @db.VarChar(50)
+  score               Int       @default(0)
+  tags                String?   @default("") @db.VarChar(100)
+  password            String?   @default("") @db.VarChar(30)
+  wallpaper           String    @default("0.0") @db.VarChar(10)
+  floor               String    @default("0.0") @db.VarChar(10)
+  landscape           String    @default("0.0") @db.VarChar(10)
+  allowPets           Boolean   @default(true) @map("allow_pets")
+  allowPetsEat        Boolean   @default(false) @map("allow_pets_eat")
+  allowWalkthrough    Boolean   @default(false) @map("allow_walkthrough")
+  allowHidewall       Boolean   @default(false) @map("allow_hidewall")
+  wallthick           Int       @default(0)
+  floorthick          Int       @default(0)
+  moderationMuteFuse  Boolean   @default(false) @map("moderation_mute_fuse")
+  allowRightsoverride Boolean   @default(false) @map("allow_rightsoverride")
+  moderationKickFuse  Int       @default(0) @map("moderation_kick_fuse")
+  moderationBanFuse   Boolean   @default(false) @map("moderation_ban_fuse")
+  groupId             Int       @default(0) @map("group_id")
+  chatType            Int       @default(0) @map("chat_type")
+  chatBalloon         Int       @default(0) @map("chat_balloon")
+  chatSpeed           Int       @default(0) @map("chat_speed")
+  chatMaxDistance     Int       @default(0) @map("chat_max_distance")
+  chatFloodProtection Int       @default(0) @map("chat_flood_protection")
+  trocStatus          Int       @default(2) @map("troc_status")
+  usersNow            Int       @default(0) @map("users_now")
+  allowHidewireds     Boolean   @default(false) @map("allow_hidewireds")
+  price               Int       @default(0)
+  wiredSecurity       Boolean   @default(true) @map("wired_security")
+  LogChat             LogChat[]
+
+  @@index([caption], map: "caption")
+  @@index([category], map: "category")
+  @@index([owner], map: "owner")
+  @@index([score], map: "score")
+  @@index([usersNow], map: "users_now")
+  @@map("room")
+}
+
+model RoomModel {
+  id        String @id @db.VarChar(100)
+  doorX     Int    @default(0) @map("door_x")
+  doorY     Int    @default(0) @map("door_y")
+  doorZ     Float  @default(0) @map("door_z")
+  doorDir   Int    @default(2) @map("door_dir")
+  heightmap String @db.MediumText
+
+  @@map("room_model")
+}
+
+model RoomModelCustom {
+  roomId     Int    @id @map("room_id")
+  doorX      Int    @default(0) @map("door_x")
+  doorY      Int    @default(0) @map("door_y")
+  doorZ      Float  @default(0) @map("door_z")
+  doorDir    Int    @default(0) @map("door_dir")
+  heightmap  String @db.MediumText
+  wallHeight Int    @default(0) @map("wall_height")
+
+  @@map("room_model_custom")
+}
+
+model RoomRight {
+  roomId Int @map("room_id")
+  userId Int @map("user_id")
+
+  @@id([roomId, userId])
+  @@index([roomId], map: "room_id")
+  @@index([userId], map: "user_id")
+  @@map("room_right")
+}
+
+model RoomSwearwordFilter {
+  word String @id @db.VarChar(200)
+
+  @@map("room_swearword_filter")
+}
+
+model User {
+  id                   Int              @id @default(autoincrement())
+  username             String           @unique(map: "username") @db.VarChar(50)
+  password             String           @db.VarChar(50)
+  mail                 String?          @default("") @db.VarChar(100)
+  authTicket           String?          @default("") @map("auth_ticket") @db.VarChar(100)
+  rank                 Int              @default(1)
+  credits              Int              @default(50000)
+  activityPoints       Int              @default(0) @map("activity_points")
+  look                 String           @default("hr-115-42.hd-190-1.ch-215-62.lg-285-91.sh-290-62") @db.VarChar(250)
+  gender               UserGender       @default(M)
+  motto                String?          @default("") @db.VarChar(50)
+  accountCreated       Int              @default(0) @map("account_created")
+  lastOnline           Int              @default(0) @map("last_online")
+  online               Boolean          @default(false)
+  ipLast               String?          @default("") @map("ip_last") @db.VarChar(120)
+  machineId            String?          @default("") @map("machine_id") @db.VarChar(100)
+  homeRoom             Int              @default(0) @map("home_room")
+  blockNewfriends      Boolean          @default(false) @map("block_newfriends")
+  hideOnline           Boolean          @default(false) @map("hide_online")
+  hideInroom           Boolean          @default(false) @map("hide_inroom")
+  lastOffline          Int              @default(0) @map("last_offline")
+  moisVip              Int              @default(0) @map("mois_vip")
+  volume               String           @default("100,100,100") @db.VarChar(11)
+  vipPoints            Int              @default(0) @map("vip_points")
+  limitCoins           Int              @default(0) @map("limit_coins")
+  acceptTrading        Boolean          @default(true) @map("accept_trading")
+  cameraFollowDisabled Boolean          @default(false) @map("camera_follow_disabled")
+  ignoreRoomInvite     Boolean          @default(false) @map("ignore_room_invite")
+  lastdailycredits     String           @default("00/00") @db.VarChar(10)
+  hideGamealert        Boolean          @default(false) @map("hide_gamealert")
+  ipcountry            String?          @default("") @db.VarChar(2)
+  gamePoints           Int              @default(0) @map("game_points")
+  gamePointsMonth      Int              @default(0) @map("game_points_month")
+  mazoscore            Int              @default(0)
+  mazo                 Int              @default(0)
+  nuxEnable            Boolean          @default(true) @map("nux_enable")
+  langue               UserLangue       @default(fr)
+  runPoints            Int              @default(0) @map("run_points")
+  runPointsMonth       Int              @default(0) @map("run_points_month")
+  isBanned             Boolean          @default(false) @map("is_banned")
+  bannerId             Int              @default(-1) @map("banner_id")
+  logLogin             LogLogin[]
+  logChat              LogChat[]
+  logSlotmachine       LogSlotmachine[]
+  logShop              LogShop[]
+  logLootbox           LogLootbox[]
+  logSandbox           LogSandbox[]
+  userOneTrade         LogTrade[]       @relation("userOneTrade")
+  userTwoTrade         LogTrade[]       @relation("userTwoTrade")
+
+  @@index([authTicket], map: "auth_ticket")
+  @@index([gamePoints], map: "gamepoint")
+  @@index([gamePointsMonth], map: "gamepoint_mouth")
+  @@index([ipLast], map: "ip_last")
+  @@index([mail], map: "mail")
+  @@index([mazo], map: "mazo")
+  @@index([mazoscore], map: "mazoscore")
+  @@index([vipPoints], map: "vip_points")
+  @@map("user")
+}
+
+model UserAchievement {
+  userId   Int    @map("user_id")
+  group    String @db.VarChar(255)
+  level    Int
+  progress Int
+
+  @@id([userId, group])
+  @@index([userId], map: "id")
+  @@map("user_achievement")
+}
+
+model UserBadge {
+  userId    Int    @map("user_id")
+  badgeId   String @map("badge_id") @db.VarChar(100)
+  badgeSlot Int    @default(0) @map("badge_slot")
+
+  @@id([userId, badgeId])
+  @@index([badgeId], map: "badge_id")
+  @@index([userId], map: "user_id")
+  @@map("user_badge")
+}
+
+model UserBanner {
+  id        Int @id @default(autoincrement())
+  user_id   Int @map("user_id")
+  banner_id Int @map("banner_id")
+
+  @@map("user_banner")
+}
+
+model UserPhoto {
+  id     Int    @id @default(autoincrement())
+  userId Int    @map("user_id")
+  photo  String @db.VarChar(32)
+  time   Int
+
+  @@index([time], map: "time")
+  @@index([userId], map: "userid")
+  @@map("user_photo")
+}
+
+model UserPremium {
+  userId                 Int @id @map("user_id")
+  timestampActivated     Int @default(0) @map("timestamp_activated")
+  timestampExpireClassic Int @default(0) @map("timestamp_expire_classic")
+  timestampExpireEpic    Int @default(0) @map("timestamp_expire_epic")
+  timestampExpireLegend  Int @default(0) @map("timestamp_expire_legend")
+
+  @@index([userId], map: "user_id")
+  @@map("user_premium")
+}
+
+model UserQuest {
+  userId   Int @map("user_id")
+  questId  Int @map("quest_id")
+  progress Int
+
+  @@id([userId, questId])
+  @@index([questId], map: "questid")
+  @@index([userId], map: "userid")
+  @@map("user_quest")
+}
+
+model UserRoleplay {
+  userId     Int @map("user_id")
+  roleplayId Int @map("roleplay_id")
+  health     Int @default(100)
+  energy     Int @default(100)
+  money      Int @default(0)
+  munition   Int @default(0)
+  exp        Int @default(0)
+  weaponFar  Int @default(0) @map("weapon_far")
+  weaponCac  Int @default(0) @map("weapon_cac")
+  hygiene    Int @default(100)
+  money1     Int @default(0) @map("money_1")
+  money2     Int @default(0) @map("money_2")
+  money3     Int @default(0) @map("money_3")
+  money4     Int @default(0) @map("money_4")
+
+  @@id([userId, roleplayId])
+  @@index([userId, roleplayId], map: "user_id")
+  @@map("user_roleplay")
+}
+
+model UserRoleplayItem {
+  id     Int @id @default(autoincrement())
+  userId Int @map("user_id")
+  rpId   Int @map("rp_id")
+  itemId Int @map("item_id")
+  count  Int @default(1)
+
+  @@index([userId, rpId], map: "user_id")
+  @@map("user_roleplay_item")
+}
+
+model UserStats {
+  id                    Int @id
+  onlineTime            Int @default(0) @map("online_time")
+  respect               Int @default(0)
+  respectGiven          Int @default(0) @map("respect_given")
+  giftsGiven            Int @default(0) @map("gifts_given")
+  giftsReceived         Int @default(0) @map("gifts_received")
+  dailyRespectPoints    Int @default(3) @map("daily_respect_points")
+  dailyPetRespectPoints Int @default(3) @map("daily_pet_respect_points")
+  achievementScore      Int @default(0) @map("achievement_score")
+  questId               Int @default(0) @map("quest_id")
+  questProgress         Int @default(0) @map("quest_progress")
+  levBuilder            Int @default(0) @map("lev_builder")
+  levSocial             Int @default(0) @map("lev_social")
+  levIdentity           Int @default(0) @map("lev_identity")
+  levExplore            Int @default(0) @map("lev_explore")
+  groupId               Int @default(0) @map("group_id")
+
+  @@index([achievementScore], map: "AchievementScore")
+  @@index([groupId], map: "groupid")
+  @@map("user_stats")
+}
+
+model UserWardrobe {
+  userId Int                @map("user_id")
+  slotId Int                @map("slot_id")
+  look   String             @db.VarChar(250)
+  gender UserWardrobeGender @default(M)
+
+  @@id([userId, slotId])
+  @@index([userId], map: "user_id")
+  @@map("user_wardrobe")
+}
+
+model WordFilterRetro {
+  word String @id @db.VarChar(255)
+
+  @@map("word_filter_retro")
+}
+
+enum BanBantype {
+  user
+  ip
+  machine
+  ignoreall
+}
+
+enum CatalogVoucherType {
+  credits
+  duckets
+}
+
+enum GuildItemType {
+  base
+  symbol
+  color
+  color2
+  color3
+}
+
+enum ModerationResolutionType {
+  Sexual
+  PII
+}
+
+enum NavigatorCategoryCategory {
+  official_view
+  hotel_view
+  myworld_view
+  roomads_view
+  query
+  rooms_game
+}
+
+enum RoleplayEnemyType {
+  bot
+  pet
+}
+
+enum RoleplayWeaponType {
+  cac
+  far
+}
+
+enum ItemBaseType {
+  s
+  i
+  r
+  b
+  p
+  c
+}
+
+enum ModerationPresetType {
+  message
+  roommessage
+}
+
+enum ModerationTicketStatus {
+  open
+  picked
+  resolved
+  abusive
+  invalid
+  deleted
+}
+
+enum UserWardrobeGender {
+  F
+  M
+}
+
+enum NavigatorCategoryViewMode {
+  REGULAR
+  THUMBNAIL
+}
+
+enum NavigatorPublicLangue {
+  fr
+  en
+  br
+}
+
+enum RoleplayItemType {
+  munition
+  health
+  energy
+  weapon_cac
+  weapon_far
+  none
+  money
+  healthenergy
+  healthtired
+  showtime
+  enable
+  hit
+  openguide
+  energytired
+  openpage
+}
+
+enum RoleplayWeaponInteraction {
+  none
+}
+
+enum CatalogBotPresetAiType {
+  pet
+  generic
+  bartender
+}
+
+enum EmulatorLootboxCategory {
+  furni
+  badge
+  winwin
+  credits
+}
+
+enum RoomState {
+  open
+  locked
+  password
+  hide
+}
+
+enum NavigatorCategorySearchAllowance {
+  NOTHING
+  SHOW_MORE
+}
+
+enum RoleplayItemCategory {
+  EQUIP
+  UTIL
+  RESSOURCE
+  QUETE
+}
+
+enum UserGender {
+  M
+  F
+}
+
+enum UserLangue {
+  fr
+  en
+  br
+}
