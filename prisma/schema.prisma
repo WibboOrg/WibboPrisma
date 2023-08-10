@@ -68,6 +68,7 @@ model BotUser {
   status      Int     @default(0)
   enable      Int     @default(0)
   handitem    Int     @default(0)
+  aiType BotUserAiType @default(generic) @map("ai_type")
 
   @@index([userId], map: "ownerId")
   @@index([roomId], map: "room_id")
@@ -1335,6 +1336,12 @@ enum CatalogBotPresetAiType {
   pet
   generic
   bartender
+}
+
+enum BotUserAiType {
+  generic
+  bartender
+  chatgpt
 }
 
 enum EmulatorLootboxCategory {
