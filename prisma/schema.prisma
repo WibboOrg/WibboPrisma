@@ -99,6 +99,7 @@ model CatalogItem {
   offerActive        Boolean             @default(true) @map("offer_active")
   badge              String              @default("") @db.VarChar(255)
   catalogItemLimited CatalogItemLimited?
+  itemBase ItemBase @relation(fields: [itemId], references: [id], onDelete: Cascade)
 
   @@index([itemId], map: "item_ids")
   @@index([pageId], map: "page_id")
@@ -539,6 +540,7 @@ model ItemBase {
   rarityLevel           Int          @default(0) @map("rarity_level")
   itemStat              ItemStat?
   logLootbox            LogLootbox[]
+  catalogItem           CatalogItem[]
 
   @@index([spriteId], map: "sprite_id")
   @@map("item_base")

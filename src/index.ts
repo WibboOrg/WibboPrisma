@@ -1,11 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { Context } from "./index.d";
 
-const prisma = new PrismaClient();
+export * from "@prisma/client/index.d";
 
-export const createContext = async (ctx: any): Promise<Context> => {
-  // Skip if you are not using a serverless environment
-  ctx.callbackWaitsForEmptyEventLoop = false;
-
-  return { ...ctx, prisma };
-};
+export const prisma: PrismaClient = new PrismaClient();
