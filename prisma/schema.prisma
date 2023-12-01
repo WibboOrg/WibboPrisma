@@ -1035,7 +1035,7 @@ model RoomSwearwordFilter {
 model User {
   id                   Int              @id @default(autoincrement())
   username             String           @unique(map: "username") @db.VarChar(50)
-  password             String           @db.VarChar(50)
+  password             String
   mail                 String?          @default("") @db.VarChar(100)
   authTicket           String?          @default("") @map("auth_ticket") @db.VarChar(100)
   rank                 Int              @default(1)
