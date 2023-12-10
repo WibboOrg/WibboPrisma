@@ -958,7 +958,7 @@ model Room {
   modelName           String    @map("model_name") @db.VarChar(50)
   score               Int       @default(0)
   tags                String?   @default("") @db.VarChar(100)
-  password            String?   @default("") @db.VarChar(30)
+  password            String?   @default("") @db.VarChar(255)
   wallpaper           String    @default("0.0") @db.VarChar(10)
   floor               String    @default("0.0") @db.VarChar(10)
   landscape           String    @default("0.0") @db.VarChar(10)
