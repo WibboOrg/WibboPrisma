@@ -765,7 +765,8 @@ model LogSandbox {
   method           String @db.VarChar(10)
   editName         String @map("edit_name")
   editKey          String @map("edit_key")
-  timestampCreated Int    @map("timestamp_created")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
 
   @@map("log_sandbox")
 }

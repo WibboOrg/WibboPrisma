@@ -64400,13 +64400,11 @@ export namespace Prisma {
   export type LogSandboxAvgAggregateOutputType = {
     id: number | null
     userId: number | null
-    timestampCreated: number | null
   }
 
   export type LogSandboxSumAggregateOutputType = {
     id: number | null
     userId: number | null
-    timestampCreated: number | null
   }
 
   export type LogSandboxMinAggregateOutputType = {
@@ -64415,7 +64413,8 @@ export namespace Prisma {
     method: string | null
     editName: string | null
     editKey: string | null
-    timestampCreated: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type LogSandboxMaxAggregateOutputType = {
@@ -64424,7 +64423,8 @@ export namespace Prisma {
     method: string | null
     editName: string | null
     editKey: string | null
-    timestampCreated: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type LogSandboxCountAggregateOutputType = {
@@ -64433,7 +64433,8 @@ export namespace Prisma {
     method: number
     editName: number
     editKey: number
-    timestampCreated: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -64441,13 +64442,11 @@ export namespace Prisma {
   export type LogSandboxAvgAggregateInputType = {
     id?: true
     userId?: true
-    timestampCreated?: true
   }
 
   export type LogSandboxSumAggregateInputType = {
     id?: true
     userId?: true
-    timestampCreated?: true
   }
 
   export type LogSandboxMinAggregateInputType = {
@@ -64456,7 +64455,8 @@ export namespace Prisma {
     method?: true
     editName?: true
     editKey?: true
-    timestampCreated?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type LogSandboxMaxAggregateInputType = {
@@ -64465,7 +64465,8 @@ export namespace Prisma {
     method?: true
     editName?: true
     editKey?: true
-    timestampCreated?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type LogSandboxCountAggregateInputType = {
@@ -64474,7 +64475,8 @@ export namespace Prisma {
     method?: true
     editName?: true
     editKey?: true
-    timestampCreated?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -64570,7 +64572,8 @@ export namespace Prisma {
     method: string
     editName: string
     editKey: string
-    timestampCreated: number
+    createdAt: Date
+    updatedAt: Date
     _count: LogSandboxCountAggregateOutputType | null
     _avg: LogSandboxAvgAggregateOutputType | null
     _sum: LogSandboxSumAggregateOutputType | null
@@ -64598,7 +64601,8 @@ export namespace Prisma {
     method?: boolean
     editName?: boolean
     editKey?: boolean
-    timestampCreated?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["logSandbox"]>
 
@@ -64608,7 +64612,8 @@ export namespace Prisma {
     method?: boolean
     editName?: boolean
     editKey?: boolean
-    timestampCreated?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
   export type LogSandboxInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -64627,7 +64632,8 @@ export namespace Prisma {
       method: string
       editName: string
       editKey: string
-      timestampCreated: number
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["logSandbox"]>
     composites: {}
   }
@@ -65028,7 +65034,8 @@ export namespace Prisma {
     readonly method: FieldRef<"LogSandbox", 'String'>
     readonly editName: FieldRef<"LogSandbox", 'String'>
     readonly editKey: FieldRef<"LogSandbox", 'String'>
-    readonly timestampCreated: FieldRef<"LogSandbox", 'Int'>
+    readonly createdAt: FieldRef<"LogSandbox", 'DateTime'>
+    readonly updatedAt: FieldRef<"LogSandbox", 'DateTime'>
   }
     
 
@@ -96000,7 +96007,8 @@ export namespace Prisma {
     method: 'method',
     editName: 'editName',
     editKey: 'editKey',
-    timestampCreated: 'timestampCreated'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type LogSandboxScalarFieldEnum = (typeof LogSandboxScalarFieldEnum)[keyof typeof LogSandboxScalarFieldEnum]
@@ -100391,7 +100399,8 @@ export namespace Prisma {
     method?: StringFilter<"LogSandbox"> | string
     editName?: StringFilter<"LogSandbox"> | string
     editKey?: StringFilter<"LogSandbox"> | string
-    timestampCreated?: IntFilter<"LogSandbox"> | number
+    createdAt?: DateTimeFilter<"LogSandbox"> | Date | string
+    updatedAt?: DateTimeFilter<"LogSandbox"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
   }
 
@@ -100401,7 +100410,8 @@ export namespace Prisma {
     method?: SortOrder
     editName?: SortOrder
     editKey?: SortOrder
-    timestampCreated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -100414,7 +100424,8 @@ export namespace Prisma {
     method?: StringFilter<"LogSandbox"> | string
     editName?: StringFilter<"LogSandbox"> | string
     editKey?: StringFilter<"LogSandbox"> | string
-    timestampCreated?: IntFilter<"LogSandbox"> | number
+    createdAt?: DateTimeFilter<"LogSandbox"> | Date | string
+    updatedAt?: DateTimeFilter<"LogSandbox"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
   }, "id">
 
@@ -100424,7 +100435,8 @@ export namespace Prisma {
     method?: SortOrder
     editName?: SortOrder
     editKey?: SortOrder
-    timestampCreated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: LogSandboxCountOrderByAggregateInput
     _avg?: LogSandboxAvgOrderByAggregateInput
     _max?: LogSandboxMaxOrderByAggregateInput
@@ -100441,7 +100453,8 @@ export namespace Prisma {
     method?: StringWithAggregatesFilter<"LogSandbox"> | string
     editName?: StringWithAggregatesFilter<"LogSandbox"> | string
     editKey?: StringWithAggregatesFilter<"LogSandbox"> | string
-    timestampCreated?: IntWithAggregatesFilter<"LogSandbox"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"LogSandbox"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"LogSandbox"> | Date | string
   }
 
   export type MessengerFriendshipWhereInput = {
@@ -106490,7 +106503,8 @@ export namespace Prisma {
     method: string
     editName: string
     editKey: string
-    timestampCreated: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutLogSandboxInput
   }
 
@@ -106500,14 +106514,16 @@ export namespace Prisma {
     method: string
     editName: string
     editKey: string
-    timestampCreated: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type LogSandboxUpdateInput = {
     method?: StringFieldUpdateOperationsInput | string
     editName?: StringFieldUpdateOperationsInput | string
     editKey?: StringFieldUpdateOperationsInput | string
-    timestampCreated?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutLogSandboxNestedInput
   }
 
@@ -106517,7 +106533,8 @@ export namespace Prisma {
     method?: StringFieldUpdateOperationsInput | string
     editName?: StringFieldUpdateOperationsInput | string
     editKey?: StringFieldUpdateOperationsInput | string
-    timestampCreated?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LogSandboxCreateManyInput = {
@@ -106526,14 +106543,16 @@ export namespace Prisma {
     method: string
     editName: string
     editKey: string
-    timestampCreated: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type LogSandboxUpdateManyMutationInput = {
     method?: StringFieldUpdateOperationsInput | string
     editName?: StringFieldUpdateOperationsInput | string
     editKey?: StringFieldUpdateOperationsInput | string
-    timestampCreated?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LogSandboxUncheckedUpdateManyInput = {
@@ -106542,7 +106561,8 @@ export namespace Prisma {
     method?: StringFieldUpdateOperationsInput | string
     editName?: StringFieldUpdateOperationsInput | string
     editKey?: StringFieldUpdateOperationsInput | string
-    timestampCreated?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MessengerFriendshipCreateInput = {
@@ -111833,13 +111853,13 @@ export namespace Prisma {
     method?: SortOrder
     editName?: SortOrder
     editKey?: SortOrder
-    timestampCreated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type LogSandboxAvgOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    timestampCreated?: SortOrder
   }
 
   export type LogSandboxMaxOrderByAggregateInput = {
@@ -111848,7 +111868,8 @@ export namespace Prisma {
     method?: SortOrder
     editName?: SortOrder
     editKey?: SortOrder
-    timestampCreated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type LogSandboxMinOrderByAggregateInput = {
@@ -111857,13 +111878,13 @@ export namespace Prisma {
     method?: SortOrder
     editName?: SortOrder
     editKey?: SortOrder
-    timestampCreated?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type LogSandboxSumOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    timestampCreated?: SortOrder
   }
 
   export type MessengerFriendshipUserOneIdUserTwoIdCompoundUniqueInput = {
@@ -117923,7 +117944,8 @@ export namespace Prisma {
     method: string
     editName: string
     editKey: string
-    timestampCreated: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type LogSandboxUncheckedCreateWithoutUserInput = {
@@ -117931,7 +117953,8 @@ export namespace Prisma {
     method: string
     editName: string
     editKey: string
-    timestampCreated: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type LogSandboxCreateOrConnectWithoutUserInput = {
@@ -118138,7 +118161,8 @@ export namespace Prisma {
     method?: StringFilter<"LogSandbox"> | string
     editName?: StringFilter<"LogSandbox"> | string
     editKey?: StringFilter<"LogSandbox"> | string
-    timestampCreated?: IntFilter<"LogSandbox"> | number
+    createdAt?: DateTimeFilter<"LogSandbox"> | Date | string
+    updatedAt?: DateTimeFilter<"LogSandbox"> | Date | string
   }
 
   export type LogTradeUpsertWithWhereUniqueWithoutUserOneTradeInput = {
@@ -118350,7 +118374,8 @@ export namespace Prisma {
     method: string
     editName: string
     editKey: string
-    timestampCreated: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type LogTradeCreateManyUserOneTradeInput = {
@@ -118490,7 +118515,8 @@ export namespace Prisma {
     method?: StringFieldUpdateOperationsInput | string
     editName?: StringFieldUpdateOperationsInput | string
     editKey?: StringFieldUpdateOperationsInput | string
-    timestampCreated?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LogSandboxUncheckedUpdateWithoutUserInput = {
@@ -118498,7 +118524,8 @@ export namespace Prisma {
     method?: StringFieldUpdateOperationsInput | string
     editName?: StringFieldUpdateOperationsInput | string
     editKey?: StringFieldUpdateOperationsInput | string
-    timestampCreated?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LogSandboxUncheckedUpdateManyWithoutUserInput = {
@@ -118506,7 +118533,8 @@ export namespace Prisma {
     method?: StringFieldUpdateOperationsInput | string
     editName?: StringFieldUpdateOperationsInput | string
     editKey?: StringFieldUpdateOperationsInput | string
-    timestampCreated?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LogTradeUpdateWithoutUserOneTradeInput = {

@@ -681,7 +681,8 @@ exports.Prisma.LogSandboxScalarFieldEnum = {
   method: 'method',
   editName: 'editName',
   editKey: 'editKey',
-  timestampCreated: 'timestampCreated'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.MessengerFriendshipScalarFieldEnum = {
