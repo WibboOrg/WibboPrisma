@@ -1,12 +1,12 @@
 {
-  "name": "wibboprisma",
+  "name": "@wibbo/prisma",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "commonjs",
   "scripts": {
-    "postinstall": "npx prisma generate"
+    "postinstall": "pnpm exec prisma generate"
   },
   "keywords": [],
   "author": "",
