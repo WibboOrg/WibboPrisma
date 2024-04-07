@@ -372,7 +372,8 @@ exports.Prisma.EmulatorAchievementScalarFieldEnum = {
 
 exports.Prisma.EmulatorBannerScalarFieldEnum = {
   id: 'id',
-  haveLayer: 'haveLayer'
+  haveLayer: 'haveLayer',
+  canTrade: 'canTrade'
 };
 
 exports.Prisma.EmulatorChatStyleScalarFieldEnum = {

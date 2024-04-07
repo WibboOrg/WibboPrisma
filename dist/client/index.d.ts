@@ -29916,16 +29916,19 @@ export namespace Prisma {
   export type EmulatorBannerMinAggregateOutputType = {
     id: number | null
     haveLayer: boolean | null
+    canTrade: boolean | null
   }
 
   export type EmulatorBannerMaxAggregateOutputType = {
     id: number | null
     haveLayer: boolean | null
+    canTrade: boolean | null
   }
 
   export type EmulatorBannerCountAggregateOutputType = {
     id: number
     haveLayer: number
+    canTrade: number
     _all: number
   }
 
@@ -29941,16 +29944,19 @@ export namespace Prisma {
   export type EmulatorBannerMinAggregateInputType = {
     id?: true
     haveLayer?: true
+    canTrade?: true
   }
 
   export type EmulatorBannerMaxAggregateInputType = {
     id?: true
     haveLayer?: true
+    canTrade?: true
   }
 
   export type EmulatorBannerCountAggregateInputType = {
     id?: true
     haveLayer?: true
+    canTrade?: true
     _all?: true
   }
 
@@ -30043,6 +30049,7 @@ export namespace Prisma {
   export type EmulatorBannerGroupByOutputType = {
     id: number
     haveLayer: boolean
+    canTrade: boolean
     _count: EmulatorBannerCountAggregateOutputType | null
     _avg: EmulatorBannerAvgAggregateOutputType | null
     _sum: EmulatorBannerSumAggregateOutputType | null
@@ -30067,11 +30074,13 @@ export namespace Prisma {
   export type EmulatorBannerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     haveLayer?: boolean
+    canTrade?: boolean
   }, ExtArgs["result"]["emulatorBanner"]>
 
   export type EmulatorBannerSelectScalar = {
     id?: boolean
     haveLayer?: boolean
+    canTrade?: boolean
   }
 
 
@@ -30081,6 +30090,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       haveLayer: boolean
+      canTrade: boolean
     }, ExtArgs["result"]["emulatorBanner"]>
     composites: {}
   }
@@ -30477,6 +30487,7 @@ export namespace Prisma {
   interface EmulatorBannerFieldRefs {
     readonly id: FieldRef<"EmulatorBanner", 'Int'>
     readonly haveLayer: FieldRef<"EmulatorBanner", 'Boolean'>
+    readonly canTrade: FieldRef<"EmulatorBanner", 'Boolean'>
   }
     
 
@@ -95575,7 +95586,8 @@ export namespace Prisma {
 
   export const EmulatorBannerScalarFieldEnum: {
     id: 'id',
-    haveLayer: 'haveLayer'
+    haveLayer: 'haveLayer',
+    canTrade: 'canTrade'
   };
 
   export type EmulatorBannerScalarFieldEnum = (typeof EmulatorBannerScalarFieldEnum)[keyof typeof EmulatorBannerScalarFieldEnum]
@@ -98250,11 +98262,13 @@ export namespace Prisma {
     NOT?: EmulatorBannerWhereInput | EmulatorBannerWhereInput[]
     id?: IntFilter<"EmulatorBanner"> | number
     haveLayer?: BoolFilter<"EmulatorBanner"> | boolean
+    canTrade?: BoolFilter<"EmulatorBanner"> | boolean
   }
 
   export type EmulatorBannerOrderByWithRelationInput = {
     id?: SortOrder
     haveLayer?: SortOrder
+    canTrade?: SortOrder
   }
 
   export type EmulatorBannerWhereUniqueInput = Prisma.AtLeast<{
@@ -98263,11 +98277,13 @@ export namespace Prisma {
     OR?: EmulatorBannerWhereInput[]
     NOT?: EmulatorBannerWhereInput | EmulatorBannerWhereInput[]
     haveLayer?: BoolFilter<"EmulatorBanner"> | boolean
+    canTrade?: BoolFilter<"EmulatorBanner"> | boolean
   }, "id">
 
   export type EmulatorBannerOrderByWithAggregationInput = {
     id?: SortOrder
     haveLayer?: SortOrder
+    canTrade?: SortOrder
     _count?: EmulatorBannerCountOrderByAggregateInput
     _avg?: EmulatorBannerAvgOrderByAggregateInput
     _max?: EmulatorBannerMaxOrderByAggregateInput
@@ -98281,6 +98297,7 @@ export namespace Prisma {
     NOT?: EmulatorBannerScalarWhereWithAggregatesInput | EmulatorBannerScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"EmulatorBanner"> | number
     haveLayer?: BoolWithAggregatesFilter<"EmulatorBanner"> | boolean
+    canTrade?: BoolWithAggregatesFilter<"EmulatorBanner"> | boolean
   }
 
   export type EmulatorChatStyleWhereInput = {
@@ -104355,34 +104372,41 @@ export namespace Prisma {
 
   export type EmulatorBannerCreateInput = {
     haveLayer?: boolean
+    canTrade?: boolean
   }
 
   export type EmulatorBannerUncheckedCreateInput = {
     id?: number
     haveLayer?: boolean
+    canTrade?: boolean
   }
 
   export type EmulatorBannerUpdateInput = {
     haveLayer?: BoolFieldUpdateOperationsInput | boolean
+    canTrade?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type EmulatorBannerUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     haveLayer?: BoolFieldUpdateOperationsInput | boolean
+    canTrade?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type EmulatorBannerCreateManyInput = {
     id?: number
     haveLayer?: boolean
+    canTrade?: boolean
   }
 
   export type EmulatorBannerUpdateManyMutationInput = {
     haveLayer?: BoolFieldUpdateOperationsInput | boolean
+    canTrade?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type EmulatorBannerUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     haveLayer?: BoolFieldUpdateOperationsInput | boolean
+    canTrade?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type EmulatorChatStyleCreateInput = {
@@ -110308,6 +110332,7 @@ export namespace Prisma {
   export type EmulatorBannerCountOrderByAggregateInput = {
     id?: SortOrder
     haveLayer?: SortOrder
+    canTrade?: SortOrder
   }
 
   export type EmulatorBannerAvgOrderByAggregateInput = {
@@ -110317,11 +110342,13 @@ export namespace Prisma {
   export type EmulatorBannerMaxOrderByAggregateInput = {
     id?: SortOrder
     haveLayer?: SortOrder
+    canTrade?: SortOrder
   }
 
   export type EmulatorBannerMinOrderByAggregateInput = {
     id?: SortOrder
     haveLayer?: SortOrder
+    canTrade?: SortOrder
   }
 
   export type EmulatorBannerSumOrderByAggregateInput = {

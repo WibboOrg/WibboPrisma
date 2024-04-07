@@ -328,6 +328,7 @@ model EmulatorAchievement {
 model EmulatorBanner {
   id        Int     @id @default(autoincrement())
   haveLayer Boolean @default(false) @map("have_layer")
+  canTrade  Boolean @default(false) @map("can_trade")
 
   @@map("emulator_banner")
 }
