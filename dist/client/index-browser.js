@@ -900,6 +900,12 @@ exports.Prisma.RoomRightScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.RoomBanScalarFieldEnum = {
+  roomId: 'roomId',
+  userId: 'userId',
+  expire: 'expire'
+};
+
 exports.Prisma.RoomSwearwordFilterScalarFieldEnum = {
   word: 'word'
 };
@@ -1285,6 +1291,7 @@ exports.Prisma.ModelName = {
   RoomModel: 'RoomModel',
   RoomModelCustom: 'RoomModelCustom',
   RoomRight: 'RoomRight',
+  RoomBan: 'RoomBan',
   RoomSwearwordFilter: 'RoomSwearwordFilter',
   User: 'User',
   UserAchievement: 'UserAchievement',

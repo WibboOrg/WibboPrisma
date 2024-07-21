@@ -404,6 +404,11 @@ export type RoomModelCustom = $Result.DefaultSelection<Prisma.$RoomModelCustomPa
  */
 export type RoomRight = $Result.DefaultSelection<Prisma.$RoomRightPayload>
 /**
+ * Model RoomBan
+ * 
+ */
+export type RoomBan = $Result.DefaultSelection<Prisma.$RoomBanPayload>
+/**
  * Model RoomSwearwordFilter
  * 
  */
@@ -1692,6 +1697,16 @@ export class PrismaClient<
   get roomRight(): Prisma.RoomRightDelegate<ExtArgs>;
 
   /**
+   * `prisma.roomBan`: Exposes CRUD operations for the **RoomBan** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RoomBans
+    * const roomBans = await prisma.roomBan.findMany()
+    * ```
+    */
+  get roomBan(): Prisma.RoomBanDelegate<ExtArgs>;
+
+  /**
    * `prisma.roomSwearwordFilter`: Exposes CRUD operations for the **RoomSwearwordFilter** model.
     * Example usage:
     * ```ts
@@ -2368,6 +2383,7 @@ export namespace Prisma {
     RoomModel: 'RoomModel',
     RoomModelCustom: 'RoomModelCustom',
     RoomRight: 'RoomRight',
+    RoomBan: 'RoomBan',
     RoomSwearwordFilter: 'RoomSwearwordFilter',
     User: 'User',
     UserAchievement: 'UserAchievement',
@@ -2397,7 +2413,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'ban' | 'botPet' | 'botUser' | 'catalogBotPreset' | 'catalogItem' | 'catalogItemLimited' | 'catalogMarketplaceData' | 'catalogMarketplaceOffer' | 'catalogPage' | 'catalogPageLangue' | 'catalogPetRace' | 'catalogPromotion' | 'catalogVoucher' | 'cmsForumPost' | 'cmsForumThread' | 'cmsFourmCategory' | 'cmsMailConfirm' | 'cmsMailForgot' | 'cmsNews' | 'cmsStaff' | 'cmsStaffProtect' | 'emulatorAchievement' | 'emulatorBanner' | 'emulatorChatStyle' | 'emulatorCommand' | 'emulatorCommandPet' | 'emulatorEffect' | 'emulatorLandingview' | 'emulatorLootbox' | 'emulatorPermission' | 'emulatorQuest' | 'emulatorSetting' | 'emulatorStats' | 'emulatorStatus' | 'emulatorText' | 'guild' | 'guildItem' | 'guildMembership' | 'guildRequest' | 'item' | 'itemBase' | 'itemLimited' | 'itemMoodlight' | 'itemPresent' | 'itemStat' | 'itemTeleport' | 'itemWired' | 'logChat' | 'logChatPub' | 'logCommand' | 'logFlagme' | 'logLogin' | 'logLootbox' | 'logPayment' | 'logShop' | 'logSlotmachine' | 'logStaff' | 'logTrade' | 'logVpn' | 'logSandbox' | 'messengerFriendship' | 'messengerOfflineMessage' | 'messengerRequest' | 'moderationPreset' | 'moderationResolution' | 'moderationTicket' | 'moderationTopic' | 'moderationTopicAction' | 'navigatorCategory' | 'navigatorPublic' | 'roleplay' | 'roleplayEnemy' | 'roleplayItem' | 'roleplayWeapon' | 'room' | 'roomModel' | 'roomModelCustom' | 'roomRight' | 'roomSwearwordFilter' | 'user' | 'userAchievement' | 'userBadge' | 'userBanner' | 'userPhoto' | 'userPremium' | 'userQuest' | 'userRoleplay' | 'userRoleplayItem' | 'userStats' | 'userWardrobe' | 'wordFilterRetro'
+      modelProps: 'ban' | 'botPet' | 'botUser' | 'catalogBotPreset' | 'catalogItem' | 'catalogItemLimited' | 'catalogMarketplaceData' | 'catalogMarketplaceOffer' | 'catalogPage' | 'catalogPageLangue' | 'catalogPetRace' | 'catalogPromotion' | 'catalogVoucher' | 'cmsForumPost' | 'cmsForumThread' | 'cmsFourmCategory' | 'cmsMailConfirm' | 'cmsMailForgot' | 'cmsNews' | 'cmsStaff' | 'cmsStaffProtect' | 'emulatorAchievement' | 'emulatorBanner' | 'emulatorChatStyle' | 'emulatorCommand' | 'emulatorCommandPet' | 'emulatorEffect' | 'emulatorLandingview' | 'emulatorLootbox' | 'emulatorPermission' | 'emulatorQuest' | 'emulatorSetting' | 'emulatorStats' | 'emulatorStatus' | 'emulatorText' | 'guild' | 'guildItem' | 'guildMembership' | 'guildRequest' | 'item' | 'itemBase' | 'itemLimited' | 'itemMoodlight' | 'itemPresent' | 'itemStat' | 'itemTeleport' | 'itemWired' | 'logChat' | 'logChatPub' | 'logCommand' | 'logFlagme' | 'logLogin' | 'logLootbox' | 'logPayment' | 'logShop' | 'logSlotmachine' | 'logStaff' | 'logTrade' | 'logVpn' | 'logSandbox' | 'messengerFriendship' | 'messengerOfflineMessage' | 'messengerRequest' | 'moderationPreset' | 'moderationResolution' | 'moderationTicket' | 'moderationTopic' | 'moderationTopicAction' | 'navigatorCategory' | 'navigatorPublic' | 'roleplay' | 'roleplayEnemy' | 'roleplayItem' | 'roleplayWeapon' | 'room' | 'roomModel' | 'roomModelCustom' | 'roomRight' | 'roomBan' | 'roomSwearwordFilter' | 'user' | 'userAchievement' | 'userBadge' | 'userBanner' | 'userPhoto' | 'userPremium' | 'userQuest' | 'userRoleplay' | 'userRoleplayItem' | 'userStats' | 'userWardrobe' | 'wordFilterRetro'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -7546,6 +7562,72 @@ export namespace Prisma {
           count: {
             args: Prisma.RoomRightCountArgs<ExtArgs>,
             result: $Utils.Optional<RoomRightCountAggregateOutputType> | number
+          }
+        }
+      }
+      RoomBan: {
+        payload: Prisma.$RoomBanPayload<ExtArgs>
+        fields: Prisma.RoomBanFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RoomBanFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RoomBanPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RoomBanFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RoomBanPayload>
+          }
+          findFirst: {
+            args: Prisma.RoomBanFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RoomBanPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RoomBanFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RoomBanPayload>
+          }
+          findMany: {
+            args: Prisma.RoomBanFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RoomBanPayload>[]
+          }
+          create: {
+            args: Prisma.RoomBanCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RoomBanPayload>
+          }
+          createMany: {
+            args: Prisma.RoomBanCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.RoomBanDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RoomBanPayload>
+          }
+          update: {
+            args: Prisma.RoomBanUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RoomBanPayload>
+          }
+          deleteMany: {
+            args: Prisma.RoomBanDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RoomBanUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.RoomBanUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RoomBanPayload>
+          }
+          aggregate: {
+            args: Prisma.RoomBanAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateRoomBan>
+          }
+          groupBy: {
+            args: Prisma.RoomBanGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<RoomBanGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RoomBanCountArgs<ExtArgs>,
+            result: $Utils.Optional<RoomBanCountAggregateOutputType> | number
           }
         }
       }
@@ -82636,6 +82718,896 @@ export namespace Prisma {
 
 
   /**
+   * Model RoomBan
+   */
+
+  export type AggregateRoomBan = {
+    _count: RoomBanCountAggregateOutputType | null
+    _avg: RoomBanAvgAggregateOutputType | null
+    _sum: RoomBanSumAggregateOutputType | null
+    _min: RoomBanMinAggregateOutputType | null
+    _max: RoomBanMaxAggregateOutputType | null
+  }
+
+  export type RoomBanAvgAggregateOutputType = {
+    roomId: number | null
+    userId: number | null
+    expire: number | null
+  }
+
+  export type RoomBanSumAggregateOutputType = {
+    roomId: number | null
+    userId: number | null
+    expire: number | null
+  }
+
+  export type RoomBanMinAggregateOutputType = {
+    roomId: number | null
+    userId: number | null
+    expire: number | null
+  }
+
+  export type RoomBanMaxAggregateOutputType = {
+    roomId: number | null
+    userId: number | null
+    expire: number | null
+  }
+
+  export type RoomBanCountAggregateOutputType = {
+    roomId: number
+    userId: number
+    expire: number
+    _all: number
+  }
+
+
+  export type RoomBanAvgAggregateInputType = {
+    roomId?: true
+    userId?: true
+    expire?: true
+  }
+
+  export type RoomBanSumAggregateInputType = {
+    roomId?: true
+    userId?: true
+    expire?: true
+  }
+
+  export type RoomBanMinAggregateInputType = {
+    roomId?: true
+    userId?: true
+    expire?: true
+  }
+
+  export type RoomBanMaxAggregateInputType = {
+    roomId?: true
+    userId?: true
+    expire?: true
+  }
+
+  export type RoomBanCountAggregateInputType = {
+    roomId?: true
+    userId?: true
+    expire?: true
+    _all?: true
+  }
+
+  export type RoomBanAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RoomBan to aggregate.
+     */
+    where?: RoomBanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoomBans to fetch.
+     */
+    orderBy?: RoomBanOrderByWithRelationInput | RoomBanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RoomBanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoomBans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoomBans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RoomBans
+    **/
+    _count?: true | RoomBanCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RoomBanAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RoomBanSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RoomBanMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RoomBanMaxAggregateInputType
+  }
+
+  export type GetRoomBanAggregateType<T extends RoomBanAggregateArgs> = {
+        [P in keyof T & keyof AggregateRoomBan]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRoomBan[P]>
+      : GetScalarType<T[P], AggregateRoomBan[P]>
+  }
+
+
+
+
+  export type RoomBanGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoomBanWhereInput
+    orderBy?: RoomBanOrderByWithAggregationInput | RoomBanOrderByWithAggregationInput[]
+    by: RoomBanScalarFieldEnum[] | RoomBanScalarFieldEnum
+    having?: RoomBanScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RoomBanCountAggregateInputType | true
+    _avg?: RoomBanAvgAggregateInputType
+    _sum?: RoomBanSumAggregateInputType
+    _min?: RoomBanMinAggregateInputType
+    _max?: RoomBanMaxAggregateInputType
+  }
+
+  export type RoomBanGroupByOutputType = {
+    roomId: number
+    userId: number
+    expire: number
+    _count: RoomBanCountAggregateOutputType | null
+    _avg: RoomBanAvgAggregateOutputType | null
+    _sum: RoomBanSumAggregateOutputType | null
+    _min: RoomBanMinAggregateOutputType | null
+    _max: RoomBanMaxAggregateOutputType | null
+  }
+
+  type GetRoomBanGroupByPayload<T extends RoomBanGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RoomBanGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RoomBanGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RoomBanGroupByOutputType[P]>
+            : GetScalarType<T[P], RoomBanGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RoomBanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    roomId?: boolean
+    userId?: boolean
+    expire?: boolean
+  }, ExtArgs["result"]["roomBan"]>
+
+  export type RoomBanSelectScalar = {
+    roomId?: boolean
+    userId?: boolean
+    expire?: boolean
+  }
+
+
+  export type $RoomBanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RoomBan"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      roomId: number
+      userId: number
+      expire: number
+    }, ExtArgs["result"]["roomBan"]>
+    composites: {}
+  }
+
+
+  type RoomBanGetPayload<S extends boolean | null | undefined | RoomBanDefaultArgs> = $Result.GetResult<Prisma.$RoomBanPayload, S>
+
+  type RoomBanCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<RoomBanFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: RoomBanCountAggregateInputType | true
+    }
+
+  export interface RoomBanDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RoomBan'], meta: { name: 'RoomBan' } }
+    /**
+     * Find zero or one RoomBan that matches the filter.
+     * @param {RoomBanFindUniqueArgs} args - Arguments to find a RoomBan
+     * @example
+     * // Get one RoomBan
+     * const roomBan = await prisma.roomBan.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends RoomBanFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, RoomBanFindUniqueArgs<ExtArgs>>
+    ): Prisma__RoomBanClient<$Result.GetResult<Prisma.$RoomBanPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one RoomBan that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {RoomBanFindUniqueOrThrowArgs} args - Arguments to find a RoomBan
+     * @example
+     * // Get one RoomBan
+     * const roomBan = await prisma.roomBan.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends RoomBanFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, RoomBanFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__RoomBanClient<$Result.GetResult<Prisma.$RoomBanPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first RoomBan that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomBanFindFirstArgs} args - Arguments to find a RoomBan
+     * @example
+     * // Get one RoomBan
+     * const roomBan = await prisma.roomBan.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends RoomBanFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, RoomBanFindFirstArgs<ExtArgs>>
+    ): Prisma__RoomBanClient<$Result.GetResult<Prisma.$RoomBanPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first RoomBan that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomBanFindFirstOrThrowArgs} args - Arguments to find a RoomBan
+     * @example
+     * // Get one RoomBan
+     * const roomBan = await prisma.roomBan.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends RoomBanFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, RoomBanFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__RoomBanClient<$Result.GetResult<Prisma.$RoomBanPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more RoomBans that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomBanFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RoomBans
+     * const roomBans = await prisma.roomBan.findMany()
+     * 
+     * // Get first 10 RoomBans
+     * const roomBans = await prisma.roomBan.findMany({ take: 10 })
+     * 
+     * // Only select the `roomId`
+     * const roomBanWithRoomIdOnly = await prisma.roomBan.findMany({ select: { roomId: true } })
+     * 
+    **/
+    findMany<T extends RoomBanFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RoomBanFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoomBanPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a RoomBan.
+     * @param {RoomBanCreateArgs} args - Arguments to create a RoomBan.
+     * @example
+     * // Create one RoomBan
+     * const RoomBan = await prisma.roomBan.create({
+     *   data: {
+     *     // ... data to create a RoomBan
+     *   }
+     * })
+     * 
+    **/
+    create<T extends RoomBanCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, RoomBanCreateArgs<ExtArgs>>
+    ): Prisma__RoomBanClient<$Result.GetResult<Prisma.$RoomBanPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many RoomBans.
+     *     @param {RoomBanCreateManyArgs} args - Arguments to create many RoomBans.
+     *     @example
+     *     // Create many RoomBans
+     *     const roomBan = await prisma.roomBan.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends RoomBanCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RoomBanCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a RoomBan.
+     * @param {RoomBanDeleteArgs} args - Arguments to delete one RoomBan.
+     * @example
+     * // Delete one RoomBan
+     * const RoomBan = await prisma.roomBan.delete({
+     *   where: {
+     *     // ... filter to delete one RoomBan
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends RoomBanDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, RoomBanDeleteArgs<ExtArgs>>
+    ): Prisma__RoomBanClient<$Result.GetResult<Prisma.$RoomBanPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one RoomBan.
+     * @param {RoomBanUpdateArgs} args - Arguments to update one RoomBan.
+     * @example
+     * // Update one RoomBan
+     * const roomBan = await prisma.roomBan.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends RoomBanUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, RoomBanUpdateArgs<ExtArgs>>
+    ): Prisma__RoomBanClient<$Result.GetResult<Prisma.$RoomBanPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more RoomBans.
+     * @param {RoomBanDeleteManyArgs} args - Arguments to filter RoomBans to delete.
+     * @example
+     * // Delete a few RoomBans
+     * const { count } = await prisma.roomBan.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends RoomBanDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RoomBanDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RoomBans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomBanUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RoomBans
+     * const roomBan = await prisma.roomBan.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends RoomBanUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, RoomBanUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one RoomBan.
+     * @param {RoomBanUpsertArgs} args - Arguments to update or create a RoomBan.
+     * @example
+     * // Update or create a RoomBan
+     * const roomBan = await prisma.roomBan.upsert({
+     *   create: {
+     *     // ... data to create a RoomBan
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RoomBan we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends RoomBanUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, RoomBanUpsertArgs<ExtArgs>>
+    ): Prisma__RoomBanClient<$Result.GetResult<Prisma.$RoomBanPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of RoomBans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomBanCountArgs} args - Arguments to filter RoomBans to count.
+     * @example
+     * // Count the number of RoomBans
+     * const count = await prisma.roomBan.count({
+     *   where: {
+     *     // ... the filter for the RoomBans we want to count
+     *   }
+     * })
+    **/
+    count<T extends RoomBanCountArgs>(
+      args?: Subset<T, RoomBanCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RoomBanCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RoomBan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomBanAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RoomBanAggregateArgs>(args: Subset<T, RoomBanAggregateArgs>): Prisma.PrismaPromise<GetRoomBanAggregateType<T>>
+
+    /**
+     * Group by RoomBan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoomBanGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RoomBanGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RoomBanGroupByArgs['orderBy'] }
+        : { orderBy?: RoomBanGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RoomBanGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRoomBanGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RoomBan model
+   */
+  readonly fields: RoomBanFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RoomBan.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RoomBanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the RoomBan model
+   */ 
+  interface RoomBanFieldRefs {
+    readonly roomId: FieldRef<"RoomBan", 'Int'>
+    readonly userId: FieldRef<"RoomBan", 'Int'>
+    readonly expire: FieldRef<"RoomBan", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * RoomBan findUnique
+   */
+  export type RoomBanFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomBan
+     */
+    select?: RoomBanSelect<ExtArgs> | null
+    /**
+     * Filter, which RoomBan to fetch.
+     */
+    where: RoomBanWhereUniqueInput
+  }
+
+
+  /**
+   * RoomBan findUniqueOrThrow
+   */
+  export type RoomBanFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomBan
+     */
+    select?: RoomBanSelect<ExtArgs> | null
+    /**
+     * Filter, which RoomBan to fetch.
+     */
+    where: RoomBanWhereUniqueInput
+  }
+
+
+  /**
+   * RoomBan findFirst
+   */
+  export type RoomBanFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomBan
+     */
+    select?: RoomBanSelect<ExtArgs> | null
+    /**
+     * Filter, which RoomBan to fetch.
+     */
+    where?: RoomBanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoomBans to fetch.
+     */
+    orderBy?: RoomBanOrderByWithRelationInput | RoomBanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RoomBans.
+     */
+    cursor?: RoomBanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoomBans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoomBans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RoomBans.
+     */
+    distinct?: RoomBanScalarFieldEnum | RoomBanScalarFieldEnum[]
+  }
+
+
+  /**
+   * RoomBan findFirstOrThrow
+   */
+  export type RoomBanFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomBan
+     */
+    select?: RoomBanSelect<ExtArgs> | null
+    /**
+     * Filter, which RoomBan to fetch.
+     */
+    where?: RoomBanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoomBans to fetch.
+     */
+    orderBy?: RoomBanOrderByWithRelationInput | RoomBanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RoomBans.
+     */
+    cursor?: RoomBanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoomBans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoomBans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RoomBans.
+     */
+    distinct?: RoomBanScalarFieldEnum | RoomBanScalarFieldEnum[]
+  }
+
+
+  /**
+   * RoomBan findMany
+   */
+  export type RoomBanFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomBan
+     */
+    select?: RoomBanSelect<ExtArgs> | null
+    /**
+     * Filter, which RoomBans to fetch.
+     */
+    where?: RoomBanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoomBans to fetch.
+     */
+    orderBy?: RoomBanOrderByWithRelationInput | RoomBanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RoomBans.
+     */
+    cursor?: RoomBanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoomBans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoomBans.
+     */
+    skip?: number
+    distinct?: RoomBanScalarFieldEnum | RoomBanScalarFieldEnum[]
+  }
+
+
+  /**
+   * RoomBan create
+   */
+  export type RoomBanCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomBan
+     */
+    select?: RoomBanSelect<ExtArgs> | null
+    /**
+     * The data needed to create a RoomBan.
+     */
+    data: XOR<RoomBanCreateInput, RoomBanUncheckedCreateInput>
+  }
+
+
+  /**
+   * RoomBan createMany
+   */
+  export type RoomBanCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RoomBans.
+     */
+    data: RoomBanCreateManyInput | RoomBanCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * RoomBan update
+   */
+  export type RoomBanUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomBan
+     */
+    select?: RoomBanSelect<ExtArgs> | null
+    /**
+     * The data needed to update a RoomBan.
+     */
+    data: XOR<RoomBanUpdateInput, RoomBanUncheckedUpdateInput>
+    /**
+     * Choose, which RoomBan to update.
+     */
+    where: RoomBanWhereUniqueInput
+  }
+
+
+  /**
+   * RoomBan updateMany
+   */
+  export type RoomBanUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RoomBans.
+     */
+    data: XOR<RoomBanUpdateManyMutationInput, RoomBanUncheckedUpdateManyInput>
+    /**
+     * Filter which RoomBans to update
+     */
+    where?: RoomBanWhereInput
+  }
+
+
+  /**
+   * RoomBan upsert
+   */
+  export type RoomBanUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomBan
+     */
+    select?: RoomBanSelect<ExtArgs> | null
+    /**
+     * The filter to search for the RoomBan to update in case it exists.
+     */
+    where: RoomBanWhereUniqueInput
+    /**
+     * In case the RoomBan found by the `where` argument doesn't exist, create a new RoomBan with this data.
+     */
+    create: XOR<RoomBanCreateInput, RoomBanUncheckedCreateInput>
+    /**
+     * In case the RoomBan was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RoomBanUpdateInput, RoomBanUncheckedUpdateInput>
+  }
+
+
+  /**
+   * RoomBan delete
+   */
+  export type RoomBanDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomBan
+     */
+    select?: RoomBanSelect<ExtArgs> | null
+    /**
+     * Filter which RoomBan to delete.
+     */
+    where: RoomBanWhereUniqueInput
+  }
+
+
+  /**
+   * RoomBan deleteMany
+   */
+  export type RoomBanDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RoomBans to delete
+     */
+    where?: RoomBanWhereInput
+  }
+
+
+  /**
+   * RoomBan without action
+   */
+  export type RoomBanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoomBan
+     */
+    select?: RoomBanSelect<ExtArgs> | null
+  }
+
+
+
+  /**
    * Model RoomSwearwordFilter
    */
 
@@ -96282,6 +97254,15 @@ export namespace Prisma {
   export type RoomRightScalarFieldEnum = (typeof RoomRightScalarFieldEnum)[keyof typeof RoomRightScalarFieldEnum]
 
 
+  export const RoomBanScalarFieldEnum: {
+    roomId: 'roomId',
+    userId: 'userId',
+    expire: 'expire'
+  };
+
+  export type RoomBanScalarFieldEnum = (typeof RoomBanScalarFieldEnum)[keyof typeof RoomBanScalarFieldEnum]
+
+
   export const RoomSwearwordFilterScalarFieldEnum: {
     word: 'word'
   };
@@ -101741,6 +102722,51 @@ export namespace Prisma {
     NOT?: RoomRightScalarWhereWithAggregatesInput | RoomRightScalarWhereWithAggregatesInput[]
     roomId?: IntWithAggregatesFilter<"RoomRight"> | number
     userId?: IntWithAggregatesFilter<"RoomRight"> | number
+  }
+
+  export type RoomBanWhereInput = {
+    AND?: RoomBanWhereInput | RoomBanWhereInput[]
+    OR?: RoomBanWhereInput[]
+    NOT?: RoomBanWhereInput | RoomBanWhereInput[]
+    roomId?: IntFilter<"RoomBan"> | number
+    userId?: IntFilter<"RoomBan"> | number
+    expire?: IntFilter<"RoomBan"> | number
+  }
+
+  export type RoomBanOrderByWithRelationInput = {
+    roomId?: SortOrder
+    userId?: SortOrder
+    expire?: SortOrder
+  }
+
+  export type RoomBanWhereUniqueInput = Prisma.AtLeast<{
+    roomId_userId?: RoomBanRoomIdUserIdCompoundUniqueInput
+    AND?: RoomBanWhereInput | RoomBanWhereInput[]
+    OR?: RoomBanWhereInput[]
+    NOT?: RoomBanWhereInput | RoomBanWhereInput[]
+    roomId?: IntFilter<"RoomBan"> | number
+    userId?: IntFilter<"RoomBan"> | number
+    expire?: IntFilter<"RoomBan"> | number
+  }, "roomId_userId">
+
+  export type RoomBanOrderByWithAggregationInput = {
+    roomId?: SortOrder
+    userId?: SortOrder
+    expire?: SortOrder
+    _count?: RoomBanCountOrderByAggregateInput
+    _avg?: RoomBanAvgOrderByAggregateInput
+    _max?: RoomBanMaxOrderByAggregateInput
+    _min?: RoomBanMinOrderByAggregateInput
+    _sum?: RoomBanSumOrderByAggregateInput
+  }
+
+  export type RoomBanScalarWhereWithAggregatesInput = {
+    AND?: RoomBanScalarWhereWithAggregatesInput | RoomBanScalarWhereWithAggregatesInput[]
+    OR?: RoomBanScalarWhereWithAggregatesInput[]
+    NOT?: RoomBanScalarWhereWithAggregatesInput | RoomBanScalarWhereWithAggregatesInput[]
+    roomId?: IntWithAggregatesFilter<"RoomBan"> | number
+    userId?: IntWithAggregatesFilter<"RoomBan"> | number
+    expire?: IntWithAggregatesFilter<"RoomBan"> | number
   }
 
   export type RoomSwearwordFilterWhereInput = {
@@ -107977,6 +109003,48 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type RoomBanCreateInput = {
+    roomId: number
+    userId: number
+    expire: number
+  }
+
+  export type RoomBanUncheckedCreateInput = {
+    roomId: number
+    userId: number
+    expire: number
+  }
+
+  export type RoomBanUpdateInput = {
+    roomId?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    expire?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RoomBanUncheckedUpdateInput = {
+    roomId?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    expire?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RoomBanCreateManyInput = {
+    roomId: number
+    userId: number
+    expire: number
+  }
+
+  export type RoomBanUpdateManyMutationInput = {
+    roomId?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    expire?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RoomBanUncheckedUpdateManyInput = {
+    roomId?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    expire?: IntFieldUpdateOperationsInput | number
+  }
+
   export type RoomSwearwordFilterCreateInput = {
     word: string
   }
@@ -113053,6 +114121,41 @@ export namespace Prisma {
   export type RoomRightSumOrderByAggregateInput = {
     roomId?: SortOrder
     userId?: SortOrder
+  }
+
+  export type RoomBanRoomIdUserIdCompoundUniqueInput = {
+    roomId: number
+    userId: number
+  }
+
+  export type RoomBanCountOrderByAggregateInput = {
+    roomId?: SortOrder
+    userId?: SortOrder
+    expire?: SortOrder
+  }
+
+  export type RoomBanAvgOrderByAggregateInput = {
+    roomId?: SortOrder
+    userId?: SortOrder
+    expire?: SortOrder
+  }
+
+  export type RoomBanMaxOrderByAggregateInput = {
+    roomId?: SortOrder
+    userId?: SortOrder
+    expire?: SortOrder
+  }
+
+  export type RoomBanMinOrderByAggregateInput = {
+    roomId?: SortOrder
+    userId?: SortOrder
+    expire?: SortOrder
+  }
+
+  export type RoomBanSumOrderByAggregateInput = {
+    roomId?: SortOrder
+    userId?: SortOrder
+    expire?: SortOrder
   }
 
   export type RoomSwearwordFilterCountOrderByAggregateInput = {
@@ -118945,6 +120048,10 @@ export namespace Prisma {
      * @deprecated Use RoomRightDefaultArgs instead
      */
     export type RoomRightArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RoomRightDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use RoomBanDefaultArgs instead
+     */
+    export type RoomBanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RoomBanDefaultArgs<ExtArgs>
     /**
      * @deprecated Use RoomSwearwordFilterDefaultArgs instead
      */

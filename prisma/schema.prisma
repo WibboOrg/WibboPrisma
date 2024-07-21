@@ -1030,6 +1030,17 @@ model RoomRight {
   @@map("room_right")
 }
 
+model RoomBan {
+  roomId Int @map("room_id")
+  userId Int @map("user_id")
+  expire Int @map("expire")
+
+  @@id([roomId, userId])
+  @@index([roomId], map: "room_id")
+  @@index([userId], map: "user_id")
+  @@map("room_ban")
+}
+
 model RoomSwearwordFilter {
   word String @id
 
