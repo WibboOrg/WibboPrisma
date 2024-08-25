@@ -333,6 +333,17 @@ model EmulatorBanner {
   @@map("emulator_banner")
 }
 
+model EmulatorBadge {
+  id        Int     @id @default(autoincrement())
+  code      String
+  canTrade  Boolean @default(false) @map("can_trade")
+  canDelete Boolean @default(false) @map("can_delete")
+  canGive   Boolean @default(false) @map("can_give")
+  amountWinwins Int @default(0) @map("amount_winwins")
+
+  @@map("emulator_badge")
+}
+
 model EmulatorChatStyle {
   id            Int    @id
   name          String @default("")

@@ -376,6 +376,15 @@ exports.Prisma.EmulatorBannerScalarFieldEnum = {
   canTrade: 'canTrade'
 };
 
+exports.Prisma.EmulatorBadgeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  canTrade: 'canTrade',
+  canDelete: 'canDelete',
+  canGive: 'canGive',
+  amountWinwins: 'amountWinwins'
+};
+
 exports.Prisma.EmulatorChatStyleScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -1236,6 +1245,7 @@ exports.Prisma.ModelName = {
   CmsStaffProtect: 'CmsStaffProtect',
   EmulatorAchievement: 'EmulatorAchievement',
   EmulatorBanner: 'EmulatorBanner',
+  EmulatorBadge: 'EmulatorBadge',
   EmulatorChatStyle: 'EmulatorChatStyle',
   EmulatorCommand: 'EmulatorCommand',
   EmulatorCommandPet: 'EmulatorCommandPet',
