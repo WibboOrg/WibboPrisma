@@ -1054,6 +1054,12 @@ exports.Prisma.UserWardrobeScalarFieldEnum = {
   gender: 'gender'
 };
 
+exports.Prisma.UserFavoriteScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  roomId: 'roomId'
+};
+
 exports.Prisma.WordFilterRetroScalarFieldEnum = {
   word: 'word'
 };
@@ -1314,6 +1320,7 @@ exports.Prisma.ModelName = {
   UserRoleplayItem: 'UserRoleplayItem',
   UserStats: 'UserStats',
   UserWardrobe: 'UserWardrobe',
+  UserFavorite: 'UserFavorite',
   WordFilterRetro: 'WordFilterRetro'
 };
 

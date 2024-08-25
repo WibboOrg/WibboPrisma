@@ -1249,6 +1249,16 @@ model UserWardrobe {
   @@map("user_wardrobe")
 }
 
+model UserFavorite {
+  id     Int @id @default(autoincrement())
+  userId Int @map("user_id")
+  roomId Int @default(0) @map("room_id")
+
+  @@index([roomId], map: "room_id")
+  @@index([userId], map: "user_id")
+  @@map("user_favorite")
+}
+
 model WordFilterRetro {
   word String @id
 
