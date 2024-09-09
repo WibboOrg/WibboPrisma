@@ -360,6 +360,14 @@ exports.Prisma.CmsStaffProtectScalarFieldEnum = {
   hide: 'hide'
 };
 
+exports.Prisma.EmulatorEconomyScalarFieldEnum = {
+  id: 'id',
+  categoryId: 'categoryId',
+  itemId: 'itemId',
+  extraData: 'extraData',
+  average_price: 'average_price'
+};
+
 exports.Prisma.EmulatorAchievementScalarFieldEnum = {
   id: 'id',
   groupName: 'groupName',
@@ -1249,6 +1257,7 @@ exports.Prisma.ModelName = {
   CmsNews: 'CmsNews',
   CmsStaff: 'CmsStaff',
   CmsStaffProtect: 'CmsStaffProtect',
+  EmulatorEconomy: 'EmulatorEconomy',
   EmulatorAchievement: 'EmulatorAchievement',
   EmulatorBanner: 'EmulatorBanner',
   EmulatorBadge: 'EmulatorBadge',

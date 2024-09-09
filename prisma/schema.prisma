@@ -313,6 +313,16 @@ model CmsStaffProtect {
   @@map("cms_staff_protect")
 }
 
+model EmulatorEconomy {
+  id            Int     @id @default(autoincrement())
+  categoryId    Int     @default(0) @map("category_id")
+  itemId        Int     @map("item_id")
+  extraData     String? @default("") @map("extra_data") @db.Text
+  average_price Int     @default(0) @map("average_price")
+
+  @@map("emulator_economy")
+}
+
 model EmulatorAchievement {
   id             Int    @id @default(autoincrement())
   groupName      String @default("ACH_") @map("group_name")
