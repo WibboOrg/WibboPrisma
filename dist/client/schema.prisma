@@ -4,8 +4,8 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
-  output = "../dist/client"
+  provider      = "prisma-client-js"
+  output        = "../dist/client"
   binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
@@ -314,13 +314,23 @@ model CmsStaffProtect {
 }
 
 model EmulatorEconomy {
-  id            Int     @id @default(autoincrement())
-  categoryId    Int     @default(0) @map("category_id")
-  itemId        Int     @map("item_id")
-  extraData     String? @default("") @map("extra_data") @db.Text
-  average_price Int     @default(0) @map("average_price")
+  id           Int     @id @default(autoincrement())
+  categoryId   Int     @default(0) @map("category_id")
+  itemId       Int     @map("item_id")
+  extraData    String? @default("") @map("extra_data") @db.Text
+  averagePrice Int     @default(0) @map("average_price")
 
   @@map("emulator_economy")
+}
+
+model EmulatorEconomyCategory {
+  id        Int    @id @default(autoincrement())
+  porentId  Int    @default(0) @map("parent_id")
+  iconImage Int    @default(1) @map("icon_image")
+  caption   String @default("") @map("caption")
+  orderNum  Int    @default(0) @map("order_num")
+
+  @@map("emulator_economy_category")
 }
 
 model EmulatorAchievement {
@@ -344,12 +354,12 @@ model EmulatorBanner {
 }
 
 model EmulatorBadge {
-  id        Int     @id @default(autoincrement())
-  code      String
-  canTrade  Boolean @default(false) @map("can_trade")
-  canDelete Boolean @default(false) @map("can_delete")
-  canGive   Boolean @default(false) @map("can_give")
-  amountWinwins Int @default(0) @map("amount_winwins")
+  id            Int     @id @default(autoincrement())
+  code          String
+  canTrade      Boolean @default(false) @map("can_trade")
+  canDelete     Boolean @default(false) @map("can_delete")
+  canGive       Boolean @default(false) @map("can_give")
+  amountWinwins Int     @default(0) @map("amount_winwins")
 
   @@map("emulator_badge")
 }
@@ -781,14 +791,14 @@ model LogVpn {
 }
 
 model LogSandbox {
-  id               Int    @id @default(autoincrement())
-  userId           Int    @map("user_id")
-  user             User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  method           String @db.VarChar(10)
-  editName         String @map("edit_name")
-  editKey          String @map("edit_key")
-  createdAt        DateTime @default(now()) @map("created_at")
-  updatedAt        DateTime @updatedAt @map("updated_at")
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  method    String   @db.VarChar(10)
+  editName  String   @map("edit_name")
+  editKey   String   @map("edit_key")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("log_sandbox")
 }

@@ -1,5 +1,5 @@
 {
-  "name": "prisma-client-c0502ae92fe344604647addf417ba85baf1a5e36cc5a2f52055331603b031488",
+  "name": "prisma-client-7352758daa18b4f42b0418d1aa79b2dc3ed62762acbdeffc084be55b287fe5f5",
   "main": "index.js",
   "types": "index.d.ts",
   "browser": "index-browser.js",
@@ -29,6 +29,12 @@
       "require": "./edge.js",
       "import": "./edge.js",
       "default": "./edge.js"
+    },
+    "./react-native": {
+      "types": "./react-native.d.ts",
+      "require": "./react-native.js",
+      "import": "./react-native.js",
+      "default": "./react-native.js"
     },
     "./extension": {
       "types": "./extension.d.ts",
@@ -71,8 +77,21 @@
       "import": "./generator-build/index.js",
       "default": "./generator-build/index.js"
     },
+    "./sql": {
+      "require": {
+        "types": "./sql.d.ts",
+        "node": "./sql.js",
+        "default": "./sql.js"
+      },
+      "import": {
+        "types": "./sql.d.ts",
+        "node": "./sql.mjs",
+        "default": "./sql.mjs"
+      },
+      "default": "./sql.js"
+    },
     "./*": "./*"
   },
-  "version": "5.11.0",
+  "version": "5.19.1",
   "sideEffects": false
 }

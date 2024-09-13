@@ -318,9 +318,19 @@ model EmulatorEconomy {
   categoryId    Int     @default(0) @map("category_id")
   itemId        Int     @map("item_id")
   extraData     String? @default("") @map("extra_data") @db.Text
-  average_price Int     @default(0) @map("average_price")
+  averagePrice Int      @default(0) @map("average_price")
 
   @@map("emulator_economy")
+}
+
+model EmulatorEconomyCategory {
+  id            Int     @id @default(autoincrement())
+  porentId      Int     @default(0) @map("parent_id")
+  iconImage     Int     @default(1) @map("icon_image")
+  caption       String  @default("") @map("caption")
+  orderNum      Int     @default(0) @map("order_num")
+
+  @@map("emulator_economy_category")
 }
 
 model EmulatorAchievement {

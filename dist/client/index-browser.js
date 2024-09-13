@@ -6,7 +6,7 @@ const {
   objectEnumValues,
   makeStrictEnum,
   Public,
-  getRuntime,
+  getRuntime
 } = require('./runtime/index-browser.js')
 
 
@@ -16,12 +16,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.11.0
- * Query Engine version: efd2449663b3d73d637ea1fd226bafbcf45b3102
+ * Prisma Client JS version: 5.19.1
+ * Query Engine version: 69d742ee20b815d88e17e54db4a2a7a3b30324e3
  */
 Prisma.prismaVersion = {
-  client: "5.11.0",
-  engine: "efd2449663b3d73d637ea1fd226bafbcf45b3102"
+  client: "5.19.1",
+  engine: "69d742ee20b815d88e17e54db4a2a7a3b30324e3"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -365,7 +365,15 @@ exports.Prisma.EmulatorEconomyScalarFieldEnum = {
   categoryId: 'categoryId',
   itemId: 'itemId',
   extraData: 'extraData',
-  average_price: 'average_price'
+  averagePrice: 'averagePrice'
+};
+
+exports.Prisma.EmulatorEconomyCategoryScalarFieldEnum = {
+  id: 'id',
+  porentId: 'porentId',
+  iconImage: 'iconImage',
+  caption: 'caption',
+  orderNum: 'orderNum'
 };
 
 exports.Prisma.EmulatorAchievementScalarFieldEnum = {
@@ -1258,6 +1266,7 @@ exports.Prisma.ModelName = {
   CmsStaff: 'CmsStaff',
   CmsStaffProtect: 'CmsStaffProtect',
   EmulatorEconomy: 'EmulatorEconomy',
+  EmulatorEconomyCategory: 'EmulatorEconomyCategory',
   EmulatorAchievement: 'EmulatorAchievement',
   EmulatorBanner: 'EmulatorBanner',
   EmulatorBadge: 'EmulatorBadge',
